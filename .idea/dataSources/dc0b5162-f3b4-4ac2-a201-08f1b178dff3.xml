@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - humanresource@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="humanresource">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="day24work"/>
+    <schema id="3" name="demo_hibernate"/>
+    <schema id="4" name="exam2"/>
+    <schema id="5" name="hrdemo"/>
+    <schema id="6" name="ht1636"/>
+    <schema id="7" name="ht1636_1"/>
+    <schema id="8" name="information_schema"/>
+    <schema id="9" name="javaeezhijian1"/>
+    <schema id="10" name="moviesql"/>
+    <schema id="11" name="mybatisdemo1"/>
+    <schema id="12" name="mysql"/>
+    <schema id="13" name="newsdemo"/>
+    <schema id="14" name="performance_schema"/>
+    <schema id="15" name="sakila"/>
+    <schema id="16" name="shopping"/>
+    <schema id="17" name="test"/>
+    <schema id="18" name="world"/>
+    <table id="19" parent="1" name="bonuspenalty"/>
+    <table id="20" parent="1" name="checking"/>
+    <table id="21" parent="1" name="demo"/>
+    <table id="22" parent="1" name="department"/>
+    <table id="23" parent="1" name="employee"/>
+    <table id="24" parent="1" name="hireinfo"/>
+    <table id="25" parent="1" name="interviewinfo"/>
+    <table id="26" parent="1" name="interviewnotice"/>
+    <table id="27" parent="1" name="position"/>
+    <table id="28" parent="1" name="postinfo"/>
+    <table id="29" parent="1" name="resume"/>
+    <table id="30" parent="1" name="salary"/>
+    <table id="31" parent="1" name="training"/>
+    <table id="32" parent="1" name="user"/>
+    <column id="33" parent="19" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="34" parent="19" name="employee_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="35" parent="19" name="reason">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="36" parent="19" name="time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="37" parent="19" name="money">
+      <data-type>double(10,2)|0</data-type>
+    </column>
+    <key id="38" parent="19" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="39" parent="20" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="40" parent="20" name="employee_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="41" parent="20" name="check_date">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="42" parent="20" name="in_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="43" parent="20" name="out_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="44" parent="20" name="result">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="45" parent="20" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="46" parent="21" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <key id="47" parent="21" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="48" parent="22" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="49" parent="22" name="name">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="50" parent="22" name="create_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="51" parent="22" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="52" parent="23" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="53" parent="23" name="resume_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="54" parent="23" name="department_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="55" parent="23" name="position_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="56" parent="23" name="employee_number">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="57" parent="23" name="password">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="58" parent="23" name="balance">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="59" parent="23" name="level">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="60" parent="23" name="status">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="61" parent="23" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="62" parent="24" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="63" parent="24" name="department_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="64" parent="24" name="position_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="65" parent="24" name="need_count">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="66" parent="24" name="status">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="67" parent="24" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="68" parent="25" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="69" parent="25" name="facenotice_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="70" parent="25" name="start_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="71" parent="25" name="end_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="72" parent="25" name="papper_scores">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="73" parent="25" name="face_scores">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="74" parent="25" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="75" parent="26" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="76" parent="26" name="employee_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="77" parent="26" name="postinfo_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="78" parent="26" name="face_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="79" parent="26" name="location">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="80" parent="26" name="status">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="81" parent="26" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="82" parent="27" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="83" parent="27" name="department_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="84" parent="27" name="name">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="85" parent="27" name="basic_salary">
+      <data-type>double(10,2)|0</data-type>
+    </column>
+    <column id="86" parent="27" name="create_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="87" parent="27" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="88" parent="28" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="89" parent="28" name="resume_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="90" parent="28" name="hireinfo">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="91" parent="28" name="remark">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="92" parent="28" name="status">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="93" parent="28" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="94" parent="29" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="95" parent="29" name="userID">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="96" parent="29" name="realName">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="97" parent="29" name="idCard">
+      <data-type>varchar(18)|0</data-type>
+    </column>
+    <column id="98" parent="29" name="sex">
+      <data-type>varchar(4)|0</data-type>
+    </column>
+    <column id="99" parent="29" name="birthday">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="100" parent="29" name="address">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="101" parent="29" name="married">
+      <data-type>varchar(4)|0</data-type>
+    </column>
+    <column id="102" parent="29" name="hobby">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="103" parent="29" name="major">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="104" parent="29" name="education">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="105" parent="29" name="experience">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="106" parent="29" name="selfIntroduce">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="107" parent="29" name="status">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="108" parent="29" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="109" parent="30" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="110" parent="30" name="employee_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="111" parent="30" name="basic">
+      <data-type>double(10,2)|0</data-type>
+    </column>
+    <column id="112" parent="30" name="bonus">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="113" parent="30" name="months">
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="114" parent="30" name="total">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="115" parent="30" name="status">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="116" parent="30" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="117" parent="31" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="118" parent="31" name="employee_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="119" parent="31" name="teacher_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="120" parent="31" name="content">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="121" parent="31" name="start_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="122" parent="31" name="end_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="123" parent="31" name="place">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <key id="124" parent="31" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="125" parent="32" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="126" parent="32" name="name">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="127" parent="32" name="password">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="128" parent="32" name="phone">
+      <data-type>varchar(11)|0</data-type>
+    </column>
+    <column id="129" parent="32" name="email">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="130" parent="32" name="status">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="131" parent="32" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>

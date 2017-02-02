@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.TrainingDao">
+
+    <!--培训关联员工和培训详情的多对多查询结果映射-->
+    <resultMap id="trainingEMPandINFO" type="com.cai.domain.Training">
+        <id property="id" column="id"/>
+        <association property="employee" javaType="com.cai.domain.Employee">
+            <id property="id" column="eid"/>
+            <result property="empNumber" column="empNumber"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="balance" column="balance"/>
+            <result property="level" column="level"/>
+            <result property="status" column="estatus"/>
+        </association>
+        <association property="trainingInfo" javaType="com.cai.domain.TrainingInfo">
+            <id property="id" column="tiid"/>
+            <result property="content" column="content"/>
+            <result property="startDate" column="startDate"/>
+            <result property="endDate" column="endDate"/>
+            <result property="place" column="place"/>
+            <result property="status" column="tistatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加培训关联-->
+    <insert id="add">
+        INSERT INTO training
+        (
+        empID,
+        trainingInfoID
+        )
+        VALUES
+        (
+        #{employee.id},
+        #{trainingInfo.id}
+        )
+    </insert>
+
+    <!--删除培训关联-->
+    <delete id="remove">
+        DELETE FROM training
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新培训关联-->
+    <update id="update">
+        UPDATE training
+        <set>
+            <if test="employee != null and employee.id != 0"> empID = #{employee.id},</if>
+            <if test="trainingInfo != null and trainingInfo.id != 0"> trainingInfoID = #{trainingInfo.id}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询培训关联（带条件）-->
+    <select id="find" parameterType="Map" resultMap="trainingEMPandINFO">
+        SELECT
+        t.*,
+        e.id eid,
+        e.empNumber,
+        e.password,
+        e.salary,
+        e.balance,
+        e.level,
+        e.status estatus,
+        ti.id tiid,
+        ti.content,
+        ti.startDate,
+        ti.endDate,
+        ti.place,
+        ti.status tistatus
+        FROM training t,employee e,trainingInfo ti
+        <where>
+            t.empID = e.id AND t.trainingInfoID = ti.id
+            <if test="id != null and id !=0">AND t.id = #{id}</if>
+            <if test="eid != null and eid !=0">AND e.id = #{eid}</if>
+            <if test="tiid != null and tiid !=0">AND ti.id = #{tiid}</if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.TrainingInfoDao">
+
+    <!--培训详情1对1培训老师的查询结果映射-->
+    <resultMap id="trainingInfoEMP" type="com.cai.domain.TrainingInfo">
+        <id property="id" column="id"/>
+        <result property="content" column="content"/>
+        <result property="startDate" column="startDate"/>
+        <result property="endDate" column="endDate"/>
+        <result property="place" column="place"/>
+        <result property="status" column="status"/>
+        <association property="teacher" javaType="com.cai.domain.Employee">
+            <id property="id" column="eid"/>
+            <result property="empNumber" column="empNumber"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="balance" column="balance"/>
+            <result property="level" column="level"/>
+            <result property="status" column="estatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加培训详情-->
+    <insert id="add">
+        INSERT INTO trainingInfo
+        (
+        teacherID,
+        content,
+        startDate,
+        endDate,
+        place,
+        status
+        )
+        VALUES
+        (
+        #{teacher.id},
+        #{content},
+        #{startDate},
+        #{endDate},
+        #{place},
+        #{status}
+        )
+    </insert>
+
+    <!--删除培训详情-->
+    <delete id="remove">
+        DELETE FROM trainingInfo
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新培训详情-->
+    <update id="update">
+        UPDATE trainingInfo
+        <set>
+            <if test="teacher != null and teacher.id != 0"> teacherID = #{teacher.id},</if>
+            <if test="content != null"> content = #{content},</if>
+            <if test="startDate != null"> startDate = #{startDate},</if>
+            <if test="endDate != null"> endDate = #{endDate},</if>
+            <if test="place != null"> place = #{place},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询培训详情（带条件）-->
+    <select id="find" parameterType="Map" resultMap="trainingInfoEMP">
+        SELECT
+        ti.*,
+        e.id eid,
+        e.empNumber,
+        e.password,
+        e.salary,
+        e.balance,
+        e.level,
+        e.status estatus
+        FROM trainingInfo ti,employee e
+        <where>
+            e.id = ti.teacherID
+            <if test="id != null and id !=0">AND ti.id = #{id}</if>
+            <if test="eid != null and eid !=0">AND e.id = #{eid}</if>
+            <if test="content != null">AND content = #{content}</if>
+            <if test="startDate != null">AND startDate = #{startDate}</if>
+            <if test="endDate != null">AND endDate = #{endDate}</if>
+            <if test="place != null">AND place = #{place}</if>
+            <if test="status != null">AND ti.status = #{status}</if>
+        </where>
+    </select>
+
+</mapper>

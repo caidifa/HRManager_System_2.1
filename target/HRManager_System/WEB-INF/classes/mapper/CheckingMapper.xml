@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.CheckingDao">
+
+    <!--考勤详情1对1员工的查询结果映射-->
+    <resultMap id="checkingEmp" type="com.cai.domain.Checking">
+        <id property="id" column="id"/>
+        <result property="checkDate" column="checkDate"/>
+        <result property="inTime" column="inTime"/>
+        <result property="outTime" column="outTime"/>
+        <result property="result" column="result"/>
+        <association property="employee" javaType="com.cai.domain.Employee">
+            <id property="id" column="eid"/>
+            <result property="empNumber" column="empNumber"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="balance" column="balance"/>
+            <result property="level" column="level"/>
+            <result property="status" column="estatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加考勤详情-->
+    <insert id="add">
+        INSERT INTO checking
+        (
+        empID,
+        checkDate,
+        inTime,
+        outTime,
+        result
+        )
+        VALUES
+        (
+        #{employee.id},
+        #{checkDate},
+        #{inTime},
+        #{outTime},
+        #{result}
+        )
+    </insert>
+
+    <!--删除考勤详情-->
+    <delete id="remove">
+        DELETE FROM checking
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新考勤详情-->
+    <update id="update">
+        UPDATE checking
+        <set>
+            <if test="employee != null and employee.id != 0"> empID = #{employee.id},</if>
+            <if test="checkDate != null"> checkDate = #{checkDate},</if>
+            <if test="inTime != null"> inTime = #{inTime},</if>
+            <if test="outTime != null"> outTime = #{outTime},</if>
+            <if test="result != null"> result = #{result}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询考勤详情（带条件）-->
+    <select id="find" parameterType="Map" resultMap="checkingEmp">
+        SELECT
+        ck.*,
+        e.id eid,
+        e.empNumber,
+        e.password,
+        e.salary,
+        e.balance,
+        e.level,
+        e.status estatus
+        FROM checking ck,employee e
+        <where>
+            e.id = ck.empID
+            <if test="id != null and id !=0">AND ck.id = #{id}</if>
+            <if test="eid != null and eid !=0">AND e.id = #{eid}</if>
+            <if test="checkDate != null">AND checkDate LIKE #{checkDate}</if>
+            <if test="inTime != null">AND inTime = #{inTime}</if>
+            <if test="outTime != null">AND outTime = #{outTime}</if>
+            <if test="result != null">AND result = #{result}</if>
+        </where>
+    </select>
+
+</mapper>

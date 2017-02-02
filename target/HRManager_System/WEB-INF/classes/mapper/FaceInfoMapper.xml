@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.FaceInfoDao">
+
+    <!--面试情况1对1面试通知的映射-->
+    <resultMap id="faceInfoN" type="com.cai.domain.FaceInfo">
+        <id property="id" column="id"/>
+        <result property="penScores" column="penScores"/>
+        <result property="faceScores" column="faceScores"/>
+        <result property="status" column="status"/>
+        <association property="faceNotice" javaType="com.cai.domain.FaceNotice">
+            <id property="id" column="fnid"/>
+            <result property="faceTime" column="faceTime"/>
+            <result property="location" column="location"/>
+            <result property="status" column="fnstatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加面试情况信息-->
+    <insert id="add" parameterType="com.cai.domain.FaceInfo">
+        INSERT INTO faceInfo
+        (
+        faceNoticeID,
+        penScores,
+        faceScores,
+        status
+        )
+        VALUES
+        (
+        #{faceNotice.id},
+        #{penScores},
+        #{faceScores},
+        #{status}
+        )
+    </insert>
+
+    <!--删除面试情况信息-->
+    <delete id="remove" parameterType="com.cai.domain.FaceInfo">
+        DELETE FROM faceInfo
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新面试情况信息-->
+    <update id="update" parameterType="com.cai.domain.FaceInfo">
+        UPDATE faceInfo
+        <set>
+            <if test="penScores != null"> penScores = #{penScores},</if>
+            <if test="faceScores != null"> faceScores = #{faceScores},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询面试情况信息（带条件）-->
+    <select id="find" parameterType="Map" resultMap="faceInfoN">
+        SELECT
+        fi.*,
+        fn.id fnid,
+        fn.faceTime,
+        fn.location,
+        fn.status fnstatus
+        FROM faceInfo fi,faceNotice fn
+        <where>
+            fn.id = fi.faceNoticeID
+            <if test="id != null and id != 0"> AND fi.id = #{id}</if>
+            <if test="fnid != null and fnid != 0"> AND fi.faceNoticeID = #{fnid}</if>
+            <if test="penScores != null"> AND penScores = #{penScores}</if>
+            <if test="faceScores != null"> AND faceScores = #{faceScores}</if>
+            <if test="status != null"> AND fi.status = #{status}</if>
+        </where>
+    </select>
+
+</mapper>

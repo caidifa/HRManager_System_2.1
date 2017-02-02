@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.HireInfoDao">
+
+    <!--招聘信息及其包括的部门职位的结果映射-->
+    <resultMap id="hireInfoDP" type="com.cai.domain.HireInfo">
+        <id property="id" column="id"/>
+        <result property="needNumber" column="needNumber"/>
+        <result property="status" column="status"/>
+        <association property="department" javaType="com.cai.domain.Department">
+            <id property="id" column="did"/>
+            <result property="dName" column="dName"/>
+            <result property="createTime" column="createTime"/>
+            <result property="status" column="dstatus"/>
+        </association>
+        <association property="position" javaType="com.cai.domain.Position">
+            <id property="id" column="pid"/>
+            <result property="pName" column="pName"/>
+            <result property="basicSalary" column="basicSalary"/>
+            <result property="createTime" column="createTime"/>
+            <result property="status" column="pstatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加招聘信息-->
+    <insert id="add" parameterType="com.cai.domain.HireInfo">
+        INSERT INTO hireInfo
+        (
+        departID,
+        positionID,
+        needNumber,
+        status
+        )
+        VALUES
+        (
+        #{department.id},
+        #{position.id},
+        #{needNumber},
+        #{status}
+        )
+    </insert>
+
+    <!--删除招聘信息-->
+    <delete id="remove" parameterType="com.cai.domain.HireInfo">
+        DELETE FROM hireInfo
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新招聘信息-->
+    <update id="update" parameterType="com.cai.domain.HireInfo">
+        UPDATE hireInfo
+        <set>
+            <if test="department != null and department.id !=0"> departID = #{department.id},</if>
+            <if test="position != null and position.id !=0"> positionID = #{position.id},</if>
+            <if test="needNumber != null"> needNumber = #{needNumber},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询招聘信息（带条件）-->
+    <select id="find" parameterType="Map" resultMap="hireInfoDP">
+        SELECT
+        h.*,
+        d.id did,
+        d.dName,
+        d.createTime,
+        d.status dstatus,
+        p.id pid,
+        p.pName,
+        p.basicSalary,
+        p.createTime,
+        p.status pstatus
+        FROM hireInfo h,department d,position p
+        <where>
+            d.id = h.departID AND p.id = h.positionID
+            <if test="id != null and id != 0"> AND h.id = #{id}</if>
+            <if test="did != null and did != 0"> AND d.id = #{did}</if>
+            <if test="pid != null and pid !=0"> AND p.id = #{pid}</if>
+            <if test="pName != null"> AND p.pName LIKE #{pName}</if>
+            <if test="needNumber != null"> AND needNumber = #{needNumber}</if>
+            <if test="status != null"> AND h.status = #{status}</if>
+        </where>
+    </select>
+
+</mapper>

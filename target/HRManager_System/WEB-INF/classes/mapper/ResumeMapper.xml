@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.ResumeDao">
+
+    <!--简历1对1用户的查询结果映射-->
+    <resultMap id="resumeUser" type="com.cai.domain.Resume">
+        <id property="id" column="id"/>
+        <result property="realName" column="realName"/>
+        <result property="idCard" column="idCard"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="address" column="address"/>
+        <result property="married" column="married"/>
+        <result property="hobby" column="hobby"/>
+        <result property="major" column="major"/>
+        <result property="education" column="education"/>
+        <result property="experience" column="experience"/>
+        <result property="selfIntroduce" column="selfIntroduce"/>
+        <result property="status" column="status"/>
+        <association property="user" javaType="com.cai.domain.User">
+            <id property="id" column="uid"/>
+            <result property="email" column="email"/>
+            <result property="phone" column="phone"/>
+            <result property="password" column="password"/>
+            <result property="status" column="ustatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加简历-->
+    <insert id="add">
+        INSERT INTO resume
+        (
+        userID,
+        realName,
+        idCard,
+        sex,
+        birthday,
+        address,
+        married,
+        hobby,
+        major,
+        education,
+        experience,
+        selfIntroduce
+        )
+        VALUES
+        (
+        #{user.id},
+        #{realName},
+        #{idCard},
+        #{sex},
+        #{birthday},
+        #{address},
+        #{married},
+        #{hobby},
+        #{major},
+        #{education},
+        #{experience},
+        #{selfIntroduce}
+        )
+    </insert>
+
+    <!--删除简历-->
+    <delete id="remove">
+        DELETE FROM resume
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新简历-->
+    <update id="update">
+        UPDATE resume
+        <set>
+            <if test="user != null and user.id != 0"> userID = #{user.id},</if>
+            <if test="realName != null"> realName = #{realName},</if>
+            <if test="idCard != null"> idCard = #{idCard},</if>
+            <if test="sex != null"> sex = #{sex},</if>
+            <if test="birthday != null"> birthday = #{birthday},</if>
+            <if test="address != null"> address = #{address},</if>
+            <if test="married != null"> married = #{married},</if>
+            <if test="hobby != null"> hobby = #{hobby},</if>
+            <if test="major != null"> major = #{major},</if>
+            <if test="education != null"> education = #{education},</if>
+            <if test="experience != null"> experience = #{experience},</if>
+            <if test="selfIntroduce != null"> selfIntroduce = #{selfIntroduce},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询简历 带条件-->
+    <select id="find" parameterType="Map" resultMap="resumeUser">
+        SELECT
+        r.*,
+        u.id uid,
+        u.email,
+        u.phone,
+        u.password,
+        u.status ustatus
+        FROM resume r,user u
+        <where>
+            u.id = r.userID
+            <if test="id != null and id != 0">AND r.id = #{id}</if>
+            <if test="realName != null">AND realName = #{realName}</if>
+            <if test="idCard != null">AND idCard = #{idCard}</if>
+            <if test="sex != null">AND sex = #{sex}</if>
+            <if test="birthday != null">AND birthday = #{birthday}</if>
+            <if test="address != null">AND address = #{address}</if>
+            <if test="married != null">AND married = #{married}</if>
+            <if test="hobby != null">AND hobby = #{hobby}</if>
+            <if test="major != null">AND major = #{major}</if>
+            <if test="education != null">AND education = #{education}</if>
+            <if test="experience != null">AND experience = #{experience}</if>
+            <if test="selfIntroduce != null">AND selfIntroduce = #{selfIntroduce}</if>
+            <if test="status != null">AND r.status = #{status}</if>
+        </where>
+    </select>
+
+    <!--查询简历 通过用户id-->
+    <select id="findByUserID" resultType="com.cai.domain.Resume">
+        SELECT * FROM resume
+        WHERE userId = #{user.id};
+    </select>
+
+</mapper>

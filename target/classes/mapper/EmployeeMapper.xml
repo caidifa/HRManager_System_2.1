@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.EmployeeDao">
+
+    <!--员工及其包括的简历部门职位的结果映射-->
+    <resultMap id="employeeRDP" type="com.cai.domain.Employee">
+        <id property="id" column="id"/>
+        <result property="empNumber" column="empNumber"/>
+        <result property="password" column="password"/>
+        <result property="salary" column="salary"/>
+        <result property="balance" column="balance"/>
+        <result property="level" column="level"/>
+        <result property="status" column="status"/>
+        <association property="resume" javaType="com.cai.domain.Resume">
+            <id property="id" column="rid"/>
+            <result property="realName" column="realName"/>
+            <result property="idCard" column="idCard"/>
+            <result property="sex" column="sex"/>
+            <result property="birthday" column="birthday"/>
+            <result property="address" column="address"/>
+            <result property="married" column="married"/>
+            <result property="hobby" column="hobby"/>
+            <result property="major" column="major"/>
+            <result property="education" column="education"/>
+            <result property="experience" column="experience"/>
+            <result property="selfIntroduce" column="selfIntroduce"/>
+            <result property="status" column="rstatus"/>
+        </association>
+        <association property="department" javaType="com.cai.domain.Department">
+            <id property="id" column="did"/>
+            <result property="dName" column="dName"/>
+            <result property="createTime" column="createTime"/>
+            <result property="status" column="dstatus"/>
+        </association>
+        <association property="position" javaType="com.cai.domain.Position">
+            <id property="id" column="pid"/>
+            <result property="pName" column="pName"/>
+            <result property="basicSalary" column="basicSalary"/>
+            <result property="createTime" column="createTime"/>
+            <result property="status" column="pstatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加员工-->
+    <insert id="add" parameterType="com.cai.domain.Employee">
+        INSERT INTO employee
+        (
+        resumeID,
+        departID,
+        positionID,
+        empNumber,
+        password,
+        salary,
+        balance,
+        level,
+        status
+        )
+        VALUES
+        (
+        #{resume.id},
+        #{department.id},
+        #{position.id},
+        #{empNumber},
+        #{password},
+        #{salary},
+        #{balance},
+        #{level},
+        #{status}
+        )
+    </insert>
+
+    <!--删除员工-->
+    <delete id="remove" parameterType="com.cai.domain.Employee">
+        DELETE FROM employee
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新员工-->
+    <update id="update" parameterType="com.cai.domain.Employee">
+        UPDATE employee
+        <set>
+            <if test="resume != null and resume.id !=0"> resumeID = #{resume.id},</if>
+            <if test="department != null and department.id !=0"> departID = #{department.id},</if>
+            <if test="position != null and position.id !=0"> positionID = #{position.id},</if>
+            <if test="empNumber != null"> empNumber = #{empNumber},</if>
+            <if test="password != null"> password = #{password},</if>
+            <if test="salary != null"> salary = #{salary},</if>
+            <if test="balance != null"> balance = #{balance},</if>
+            <if test="level != null"> level = #{level},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询员工（带条件）-->
+    <select id="find" parameterType="Map" resultMap="employeeRDP">
+        SELECT
+        e.*,
+        r.id rid,
+        r.realName,
+        r.idCard,
+        r.sex,
+        r.birthday,
+        r.address,
+        r.married,
+        r.hobby,
+        r.major,
+        r.education,
+        r.experience,
+        r.selfIntroduce,
+        r.status rstatus,
+        d.id did,
+        d.dName,
+        d.createTime,
+        d.status dstatus,
+        p.id pid,
+        p.pName,
+        p.basicSalary,
+        p.createTime,
+        p.status pstatus
+        FROM employee e,resume r,department d,position p
+        <where>
+            r.id = e.resumeID AND d.id = e.departID AND p.id = e.positionID
+            <if test="id != null and id !=0">AND e.id = #{id}</if>
+            <if test="rid != null and rid !=0">AND resumeID = #{rid}</if>
+            <if test="did != null and did != 0"> AND departID = #{did}</if>
+            <if test="pid != null and pid !=0"> AND positionID = #{pid}</if>
+            <if test="empNumber != null"> AND empNumber = #{empNumber}</if>
+            <if test="password != null"> AND password = #{password}</if>
+            <if test="salary != null"> AND salary = #{salary}</if>
+            <if test="balance != null"> AND balance = #{balance}</if>
+            <if test="level != null"> AND level = #{level}</if>
+            <if test="status != null"> AND e.status = #{status}</if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.FaceNoticeDao">
+
+    <!--面试通知1对1面试情况的映射-->
+    <resultMap id="faceNoticeEP" type="com.cai.domain.FaceNotice">
+        <id property="id" column="id"/>
+        <result property="faceTime" column="faceTime"/>
+        <result property="location" column="location"/>
+        <result property="status" column="status"/>
+        <association property="employee" javaType="com.cai.domain.Employee">
+            <id property="id" column="eid"/>
+            <result property="empNumber" column="empNumber"/>
+            <result property="password" column="password"/>
+            <result property="balance" column="balance"/>
+            <result property="level" column="level"/>
+            <result property="status" column="fnstatus"/>
+        </association>
+        <association property="postInfo" javaType="com.cai.domain.PostInfo">
+            <id property="id" column="postid"/>
+            <result property="remark" column="remark"/>
+            <result property="status" column="poststatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加面试通知信息-->
+    <insert id="add" parameterType="com.cai.domain.FaceNotice">
+        INSERT INTO faceNotice
+        (
+        empID,
+        postInfoID,
+        faceTime,
+        location,
+        status
+        )
+        VALUES
+        (
+        #{employee.id},
+        #{postInfo.id},
+        #{faceTime},
+        #{location},
+        #{status}
+        )
+    </insert>
+
+    <!--删除面试通知信息-->
+    <delete id="remove" parameterType="com.cai.domain.FaceNotice">
+        DELETE FROM faceNotice
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新面试通知信息-->
+    <update id="update" parameterType="com.cai.domain.FaceNotice">
+        UPDATE faceNotice
+        <set>
+            <if test="faceTime != null"> faceTime = #{faceTime},</if>
+            <if test="location != null"> location = #{location},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询面试通知信息（带条件）-->
+    <select id="find" parameterType="Map" resultMap="faceNoticeEP">
+        SELECT
+        fn.*,
+        e.id eid,
+        e.empNumber,
+        e.password,
+        e.balance,
+        e.level,
+        e.status estatus,
+        post.id postid,
+        post.remark,
+        post.status poststatus
+        FROM faceNotice fn,employee e,postInfo post
+        <where>
+            fn.empID=e.id AND fn.postInfoID=post.id
+            <if test="id != null and id != 0"> AND fn.id = #{id}</if>
+            <if test="eid != null and eid != 0"> AND e.id = #{eid}</if>
+            <if test="postid != null and postid != 0"> AND post.id = #{postid}</if>
+            <if test="fnid != null and fnid != 0"> AND fi.faceNoticeID = #{fnid}</if>
+            <if test="faceTime != null"> AND faceTime = #{faceTime}</if>
+            <if test="location != null"> AND location = #{location}</if>
+            <if test="status != null"> AND fn.status = #{status}</if>
+        </where>
+    </select>
+
+</mapper>

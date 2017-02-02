@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.PositionDao">
+
+    <!--职位1对1部门的查询结果映射-->
+    <resultMap id="positionDepartment" type="com.cai.domain.Position">
+        <id property="id" column="id"/>
+        <result property="pName" column="pName"/>
+        <result property="basicSalary" column="basicSalary"/>
+        <result property="createTime" column="createTime"/>
+        <result property="status" column="status"/>
+        <association property="department" javaType="com.cai.domain.Department">
+            <id property="id" column="did"/>
+            <result property="dName" column="dName"/>
+            <result property="createTime" column="createTime"/>
+            <result property="status" column="dstatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加职位-->
+    <insert id="add">
+        INSERT INTO position
+        (
+        departID,
+        pName,
+        basicSalary,
+        createTime,
+        status
+        )
+        VALUES
+        (
+        #{department.id},
+        #{pName},
+        #{basicSalary},
+        #{createTime},
+        #{status}
+        )
+    </insert>
+
+    <!--删除职位-->
+    <delete id="remove">
+        DELETE FROM position
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新职位-->
+    <update id="update">
+        UPDATE position
+        <set>
+            <if test="department != null and department.id != 0"> departID = #{department.id},</if>
+            <if test="pName != null"> pName = #{pName},</if>
+            <if test="basicSalary != null"> basicSalary = #{basicSalary},</if>
+            <if test="createTime != null"> createTime = #{createTime},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询职位（带条件）-->
+    <select id="find" parameterType="Map" resultMap="positionDepartment">
+        SELECT
+        p.*,
+        d.id did,
+        d.dName,
+        d.createTime,
+        d.status dstatus
+        FROM department d,position p
+        <where>
+            d.id = p.departID
+            <if test="id != null and id !=0">AND p.id = #{id}</if>
+            <if test="did != null and did !=0">AND d.id = #{did}</if>
+            <if test="pName != null">AND pName = #{pName}</if>
+            <if test="basicSalary != null">AND basicSalary = #{basicSalary}</if>
+            <if test="createTime != null">AND p.createTime = #{createTime}</if>
+            <if test="status != null">AND p.status = #{status}</if>
+        </where>
+    </select>
+
+    <!--查询职位 通过部门id-->
+    <select id="findByDepID" resultType="com.cai.domain.Position">
+        SELECT * FROM position
+        WHERE departID = #{department.id};
+    </select>
+
+</mapper>

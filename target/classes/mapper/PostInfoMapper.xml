@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.PostInfoDao">
+
+    <!--投递信息1对多职位的查询结果映射-->
+    <resultMap id="postInfoRH" type="com.cai.domain.PostInfo">
+        <id property="id" column="id"/>
+        <result property="remark" column="remark"/>
+        <association property="resume" javaType="com.cai.domain.Resume">
+            <id property="id" column="rid"/>
+            <result property="realName" column="realName"/>
+            <result property="idCard" column="idCard"/>
+            <result property="sex" column="sex"/>
+            <result property="birthday" column="birthday"/>
+            <result property="address" column="address"/>
+            <result property="married" column="married"/>
+            <result property="hobby" column="hobby"/>
+            <result property="major" column="major"/>
+            <result property="education" column="education"/>
+            <result property="experience" column="experience"/>
+            <result property="selfIntroduce" column="selfIntroduce"/>
+            <result property="status" column="rstatus"/>
+        </association>
+        <association property="hireInfo" javaType="com.cai.domain.HireInfo">
+            <id property="id" column="hid"/>
+            <result property="needNumber" column="needNumber"/>
+            <result property="status" column="hstatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加投递信息-->
+    <insert id="add">
+        INSERT INTO postInfo
+        (
+        resumeID,
+        hireInfoID,
+        remark,
+        status
+        )
+        VALUES
+        (
+        #{resume.id},
+        #{hireInfo.id},
+        #{remark},
+        #{status}
+        )
+    </insert>
+
+    <!--删除投递信息-->
+    <delete id="remove">
+        DELETE FROM postInfo
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新投递信息-->
+    <update id="update">
+        UPDATE postInfo
+        <set>
+            <if test="remark != null"> remark = #{remark},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询投递信息（带条件）-->
+    <select id="find" parameterType="Map" resultMap="postInfoRH">
+        SELECT
+        p.*,
+        r.id rid,
+        r.realName,
+        r.idCard,
+        r.sex,
+        r.birthday,
+        r.address,
+        r.married,
+        r.hobby,
+        r.major,
+        r.education,
+        r.experience,
+        r.selfIntroduce,
+        r.status rstatus,
+        h.id hid,
+        h.needNumber,
+        h.status hstatus
+        FROM postInfo p,resume r,hireInfo h
+        <where>
+            r.id = p.resumeID AND h.id = p.hireInfoID
+            <if test="id != null and id !=0">AND p.id = #{id}</if>
+            <if test="rid != null and rid != 0"> AND r.id = #{rid}</if>
+            <if test="hid != null and hid !=0"> AND h.id = #{hid}</if>
+            <if test="remark != null">AND remark = #{remark}</if>
+            <if test="status != null">AND p.status = #{status}</if>
+        </where>
+    </select>
+
+</mapper>

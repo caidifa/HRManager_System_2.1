@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.SalaryDao">
+
+    <!--薪资1对1员工的查询结果映射-->
+    <resultMap id="salaryEmp" type="com.cai.domain.Salary">
+        <id property="id" column="id"/>
+        <result property="yMonth" column="yMonth"/>
+        <result property="bCost" column="bCost"/>
+        <result property="pCost" column="pCost"/>
+        <result property="sCost" column="sCost"/>
+        <result property="total" column="total"/>
+        <result property="status" column="status"/>
+        <association property="employee" javaType="com.cai.domain.Employee">
+            <id property="id" column="eid"/>
+            <result property="empNumber" column="empNumber"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="balance" column="balance"/>
+            <result property="level" column="level"/>
+            <result property="status" column="estatus"/>
+        </association>
+    </resultMap>
+
+    <!--添加薪资-->
+    <insert id="add">
+        INSERT INTO salary
+        (
+        empID,
+        yMonth,
+        bCost,
+        pCost,
+        sCost,
+        total,
+        status
+        )
+        VALUES
+        (
+        #{employee.id},
+        #{yMonth},
+        #{bCost},
+        #{pCost},
+        #{sCost},
+        #{total},
+        #{status}
+        )
+    </insert>
+
+    <!--删除薪资-->
+    <delete id="remove">
+        DELETE FROM salary
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新薪资-->
+    <update id="update">
+        UPDATE salary
+        <set>
+            <if test="employee != null and employee.id != 0"> empID = #{employee.id},</if>
+            <if test="yMonth != null"> yMonth = #{yMonth},</if>
+            <if test="bCost != null"> bCost = #{bCost},</if>
+            <if test="pCost != null"> pCost = #{pCost},</if>
+            <if test="sCost != null"> sCost = #{sCost},</if>
+            <if test="total != null"> total = #{total},</if>
+            <if test="status != null"> status = #{status}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询薪资（带条件）-->
+    <select id="find" parameterType="Map" resultMap="salaryEmp">
+        SELECT
+        s.*,
+        e.id eid,
+        e.empNumber,
+        e.password,
+        e.salary,
+        e.balance,
+        e.level,
+        e.status estatus
+        FROM salary s,employee e
+        <where>
+            e.id = s.empID
+            <if test="id != null and id !=0">AND s.id = #{id}</if>
+            <if test="eid != null and eid !=0">AND e.id = #{eid}</if>
+            <if test="yMonth != null">AND yMonth = #{yMonth}</if>
+            <if test="bCost != null">AND bCost = #{bCost}</if>
+            <if test="pCost != null">AND pCost = #{pCost}</if>
+            <if test="sCost != null">AND sCost = #{sCost}</if>
+            <if test="total != null">AND total = #{total}</if>
+            <if test="status != null">AND status = #{status}</if>
+        </where>
+    </select>
+
+</mapper>

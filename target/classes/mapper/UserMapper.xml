@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.dao.UserDao">
+
+    <!--用户1对1简历的查询结果映射-->
+    <resultMap id="userResume" type="com.cai.domain.User">
+        <id property="id" column="id" javaType="int"/>
+        <result property="email" column="email" javaType="String"/>
+        <result property="phone" column="phone" javaType="String"/>
+        <association property="resume" column="id" javaType="com.cai.domain.Resume"
+                     select="com.cai.dao.ResumeDao.findByUserID"/>
+    </resultMap>
+
+    <!--添加用户-->
+    <insert id="add" parameterType="com.cai.domain.User">
+        INSERT INTO user
+        (
+        email,
+        phone,
+        password
+        )
+        VALUES
+        (
+        #{email},
+        #{phone},
+        #{password}
+        )
+    </insert>
+
+    <!--删除用户-->
+    <delete id="remove" parameterType="com.cai.domain.User">
+        DELETE FROM user
+        WHERE id= #{id}
+    </delete>
+
+    <!--更新用户-->
+    <update id="update" parameterType="com.cai.domain.User">
+        UPDATE user
+        <set>
+            <if test="email != null"> email = #{email},</if>
+            <if test="phone != null"> phone = #{phone},</if>
+            <if test="password != null"> password = #{password}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--查询用户（带条件）-->
+    <select id="find" parameterType="Map" resultMap="userResume">
+        SELECT * FROM user
+        <where>
+            <if test="id != null and id !=0">AND id = #{id}</if>
+            <if test="email != null">AND email = #{email}</if>
+            <if test="phone != null">AND phone = #{phone}</if>
+        </where>
+    </select>
+</mapper>
