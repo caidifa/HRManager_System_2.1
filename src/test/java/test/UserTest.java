@@ -1,3 +1,5 @@
+package test;
+
 import com.cai.domain.User;
 import com.cai.service.UserService;
 import org.junit.Test;

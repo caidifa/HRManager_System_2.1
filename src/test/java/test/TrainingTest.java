@@ -1,3 +1,5 @@
+package test;
+
 import com.cai.dao.TrainingDao;
 import com.cai.dao.TrainingInfoDao;
 import com.cai.domain.Training;

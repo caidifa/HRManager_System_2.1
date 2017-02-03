@@ -1,3 +1,5 @@
+package test;
+
 import com.cai.dao.BonuspenaltyDao;
 import com.cai.dao.CheckingDao;
 import com.cai.domain.Bonuspenalty;

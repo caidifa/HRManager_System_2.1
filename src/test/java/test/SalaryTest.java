@@ -1,3 +1,5 @@
+package test;
+
 import com.cai.dao.SalaryDao;
 import com.cai.domain.Salary;
 import com.cai.service.SalaryService;

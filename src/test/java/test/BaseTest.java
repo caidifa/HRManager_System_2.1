@@ -1,3 +1,5 @@
+package test;
+
 import com.cai.dao.UserDao;
 import com.cai.domain.User;
 import com.cai.utils.MatchUtil;

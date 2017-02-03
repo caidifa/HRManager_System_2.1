@@ -1,3 +1,5 @@
+package test;
+
 import com.cai.dao.*;
 import com.cai.domain.*;
 import com.cai.service.*;

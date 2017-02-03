@@ -1,3 +1,5 @@
+package test;
+
 import com.cai.domain.Resume;
 import com.cai.service.ResumeService;
 import org.junit.Test;
