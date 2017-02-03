@@ -1,23 +1,14 @@
 package test;
 
-import com.cai.dao.UserDao;
-import com.cai.domain.User;
 import com.cai.utils.MatchUtil;
 import com.cai.utils.MoneyUtil;
 import com.cai.utils.StringUtil;
 import com.cai.utils.TimeUtil;
-import com.mysql.jdbc.StringUtils;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.sql.Time;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by caibaolong on 2017/1/12.
