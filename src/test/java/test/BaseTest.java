@@ -27,6 +27,7 @@ public class BaseTest {
     @Test
     public void test1() throws ParseException {
         System.out.println(MoneyUtil.saveTwoNumber(0));
+        System.out.println(MoneyUtil.saveTwoNumber(0));
 
     }
 
