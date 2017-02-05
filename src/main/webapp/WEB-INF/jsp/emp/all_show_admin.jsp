@@ -76,19 +76,19 @@
                         <td>${el.status}&emsp;&emsp;</td>
                         <td>
                             <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <a href="javascript:salaryCount(${el.id})"
-                                       class="am-btn am-btn-success am-btn-xs">
-                                        <span class="am-icon-calculator"></span> 结算
-                                    </a>
-                                </div>
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <a href="javascript:editEmp(${el.id})"
-                                       class="am-btn am-btn-secondary am-btn-xs">
-                                        <span class="am-icon-pencil-square-o"></span> 编辑
-                                    </a>
-                                </div>
                                 <c:if test="${el.status eq '在职'}">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <a href="javascript:salaryCount(${el.id})"
+                                           class="am-btn am-btn-success am-btn-xs">
+                                            <span class="am-icon-calculator"></span> 结算
+                                        </a>
+                                    </div>
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <a href="javascript:editEmp(${el.id})"
+                                           class="am-btn am-btn-secondary am-btn-xs">
+                                            <span class="am-icon-pencil-square-o"></span> 编辑
+                                        </a>
+                                    </div>
                                     <div class="am-btn-group am-btn-group-xs">
                                         <a href="javascript:dismissEmp(${el.id})"
                                            class="am-btn am-btn-danger am-btn-xs">
@@ -129,7 +129,7 @@
     <%--工资结算--%>
     function salaryCount(eid) {
         $.ajax({
-            url: 'sal/salaryCount.do?eid='+eid,
+            url: 'sal/salaryCount.do?eid=' + eid,
             type: "post",
             success: function (result) {
                 $("#contentShow").html(result);
