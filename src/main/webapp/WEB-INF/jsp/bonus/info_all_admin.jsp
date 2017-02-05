@@ -18,6 +18,14 @@
 <%--内容 开始--%>
 <div class="am-g">
     <div class="am-u-sm-12">
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+                <a href="javascript:addBP();" class="am-btn am-btn-success am-btn-xs">
+                    <span class="am-icon-plus"></span> 添加奖惩
+                </a>
+            </div>
+        </div>
+        <hr>
         <table class="am-table am-table-striped am-table-bordered am-table-compact am-table-hover" id="bonusAll">
             <thead>
             <tr>
@@ -38,7 +46,7 @@
                     <td>${bl.employee.empNumber}</td>
                     <td>${bl.reason}</td>
                     <td>${bl.time}</td>
-                    <td>${bl.money}</td>
+                    <td>${bl.money}元</td>
                     <td>${bl.type}</td>
                     <td>${bl.status}<c:if test="${empty bl.status}">无</c:if></td>
                     <td>
@@ -69,6 +77,16 @@
             "ordering": false
         });
     });
+    <%--添加奖惩--%>
+    function addBP() {
+        $.ajax({
+            url: 'check/addBP.do',
+            type: "post",
+            success: function (result) {
+                $("#mainShow").html(result);
+            }
+        });
+    }
     <%--接受并处理复议--%>
     function handleReview(blid) {
         $.ajax({

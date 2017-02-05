@@ -40,7 +40,7 @@
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="javascript:salaryCount(${el.id})"
                                        class="am-btn am-btn-success am-btn-xs">
-                                        <span class="am-icon-pencil-square-o"></span> 工资 结算
+                                        <span class="am-icon-calculator"></span> 工资 结算
                                     </a>
                                 </div>
                             </div>

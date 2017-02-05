@@ -297,6 +297,45 @@ public class EmployeeController {
         return "emp/all_show_emp";
     }
 
+    //员工修改密码
+    @RequestMapping(value = "/editPassword.do")
+    public String editPassword() {
+        return "emp/pswd_edit_emp";
+    }
+
+    //员工修改密码
+    @RequestMapping(value = "/changePassword.do")
+    public void changePassword(int eid, String password1, String password2, String password3, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        Employee e = employeeService.findByIf("id", null, eid).get(0);
+        String password = e.getPassword();
+        if ("".equals(password1)||"".equals(password2)||"".equals(password2)) {
+            out.print("请全部输入!");
+            out.close();
+            return;
+        }
+        if (!password1.equals(password)) {
+            out.print("原密码有误!");
+            out.close();
+            return;
+        }
+        if (!password2.equals(password3)) {
+            out.print("2次密码不一致!");
+            out.close();
+            return;
+        }
+        if (password1.equals(password2)) {
+            out.print("新密码不能与原密码一样!");
+            out.close();
+            return;
+        }
+        e.setPassword(password2);
+        employeeService.update(e);
+        out.print("ok");
+        out.flush();
+        out.close();
+    }
 
 
 }

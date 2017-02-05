@@ -2,6 +2,7 @@ package com.cai.web.controller;
 
 import com.cai.domain.Bonuspenalty;
 import com.cai.domain.Checking;
+import com.cai.domain.Employee;
 import com.cai.service.BonuspenaltyService;
 import com.cai.service.CheckingService;
 import com.cai.service.EmployeeService;
@@ -181,7 +182,42 @@ public class CheckingController {
         out.close();
     }
 
+    //管理员 奖惩的添加页面
+    @RequestMapping(value = "/addBP.do")
+    public String addBP(Model model) {
+        List<Employee> employeeList = employeeService.findByIf("status", "在职", 0);
+        model.addAttribute("employeeList", employeeList);
+        return "bonus/info_add_admin";
+    }
 
+    //管理员 奖惩的添加确认
+    @RequestMapping(value = "/addBPConfirm.do")
+    public void addBPConfirm(Bonuspenalty bp, int eid, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        if (eid == 0) {
+            out.print("请选择员工!");
+            out.close();
+            return;
+        }
+        if ("".equals(bp.getReason())) {
+            out.print("原因不能为空!");
+            out.close();
+            return;
+        }
+        if (bp.getMoney() <= 0) {
+            out.print("奖惩金不能小于等于0!");
+            out.close();
+            return;
+        }
+        Employee e = new Employee();
+        e.setId(eid);
+        bp.setEmployee(e);
+        bp.setTime(TimeUtil.nowForYMD());
+        bonuspenaltyService.add(bp);
+        out.print("ok");
+        out.close();
+    }
 
 
 }

@@ -61,11 +61,11 @@
                     <tr onclick="oneSelect(this)">
                         <td><input type="checkbox" name="eids" value="${el.id}"/></td>
                         <td>${el.id}</td>
-                        <td>${el.resume.realName}</td>
-                        <td>${el.department.dName}</td>
-                        <td>${el.position.pName}</td>
-                        <td>${el.empNumber}</td>
-                        <td>${el.password}</td>
+                        <td>${el.resume.realName}&emsp;</td>
+                        <td>${el.department.dName}&emsp;</td>
+                        <td>${el.position.pName}&emsp;</td>
+                        <td>${el.empNumber}&emsp;&emsp;</td>
+                        <td>${el.password}&emsp;&emsp;</td>
                         <td>${el.salary}元</td>
                         <c:if test="${el.level == 0}">
                             <td>非管理员</td>
@@ -73,20 +73,26 @@
                         <c:if test="${el.level == 1}">
                             <td>管理员</td>
                         </c:if>
-                        <td>${el.status}</td>
+                        <td>${el.status}&emsp;&emsp;</td>
                         <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    <a href="javascript:salaryCount(${el.id})"
+                                       class="am-btn am-btn-success am-btn-xs">
+                                        <span class="am-icon-calculator"></span> 结算
+                                    </a>
+                                </div>
+                                <div class="am-btn-group am-btn-group-xs">
                                     <a href="javascript:editEmp(${el.id})"
                                        class="am-btn am-btn-secondary am-btn-xs">
-                                        <span class="am-icon-pencil-square-o"></span> 编 辑
+                                        <span class="am-icon-pencil-square-o"></span> 编辑
                                     </a>
                                 </div>
                                 <c:if test="${el.status eq '在职'}">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <a href="javascript:dismissEmp(${el.id})"
                                            class="am-btn am-btn-danger am-btn-xs">
-                                            <span class="am-icon-trash-o"></span> 开 除
+                                            <span class="am-icon-trash-o"></span> 开除
                                         </a>
                                     </div>
                                 </c:if>
@@ -104,9 +110,9 @@
 <%--js代码 ajax--%>
 <script type="text/javascript">
     <%--批量开除员工--%>
-    function removeManyPosi() {
+    function removeManyEmp() {
         $.ajax({
-            url: 'posi/removeManyPosi.do',
+            url: 'posi/removeManyEmp.do',
             data: $('#empCheckedForm').serialize(),
             type: "post",
             success: function (result) {
@@ -117,6 +123,17 @@
                     $('#messageContent').html(result);
                 }
                 $('#messageTips').modal();
+            }
+        });
+    }
+    <%--工资结算--%>
+    function salaryCount(eid) {
+        $.ajax({
+            url: 'sal/salaryCount.do?eid='+eid,
+            type: "post",
+            success: function (result) {
+                $("#contentShow").html(result);
+                $("#contentTips").modal();
             }
         });
     }
@@ -146,6 +163,7 @@
             }
         });
     }
+
 </script>
 
 </body>

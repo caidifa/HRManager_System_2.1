@@ -1,15 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>个人信息编辑页面</title>
+    <title>员工修改密码页面</title>
 </head>
 <body>
 
 <%--左上角显示--%>
 <div class="am-cf am-padding am-padding-bottom-0">
     <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">个人信息</strong> /
-        <small>Personal Information</small>
+        <strong class="am-text-primary am-text-lg">修改个人密码</strong> /
+        <small>Edit Personal Password</small>
     </div>
 </div>
 <hr/>
@@ -17,28 +17,28 @@
 <%--内容 开始--%>
 <div class="am-g">
     <div class="am-u-sm-12 am-u-md-6 am-u-md-pull-12">
-        <form id="userChangeform" class="am-form am-form-horizontal">
+        <form id="passwordform" class="am-form am-form-horizontal">
             <div class="am-form-group">
-                <label class="am-u-sm-6 am-form-label">邮箱</label>
+                <label class="am-u-sm-6 am-form-label">原密码</label>
                 <div class="am-u-sm-6">
-                    <input type="email" name="email" value="${sessionScope.user.email}" placeholder="绑定邮箱">
+                    <input type="text" name="password1" placeholder="输入原密码">
                 </div>
             </div>
             <div class="am-form-group">
-                <label class="am-u-sm-6 am-form-label">手机号</label>
+                <label class="am-u-sm-6 am-form-label">新密码</label>
                 <div class="am-u-sm-6">
-                    <input type="number" name="phone" value="${sessionScope.user.phone}" placeholder="绑定手机号" maxlength="11">
+                    <input type="text" name="password2" placeholder="输入新密码">
                 </div>
             </div>
             <div class="am-form-group">
-                <label class="am-u-sm-6 am-form-label">登陆密码</label>
+                <label class="am-u-sm-6 am-form-label">重复密码</label>
                 <div class="am-u-sm-6">
-                    <input type="text" name="password" value="${sessionScope.user.password}" placeholder="密码不能空">
+                    <input type="text" name="password3" placeholder="重复密码">
                 </div>
             </div>
             <div class="am-form-group">
                 <div class="am-u-sm-6 am-u-sm-push-6">
-                    <a href="javascript:saveChange()" class="am-btn am-btn-primary">保存修改</a>
+                    <a href="javascript:changePassword()" class="am-btn am-btn-primary">保存修改</a>
                 </div>
             </div>
         </form>
@@ -49,11 +49,11 @@
 
 <%--js代码 ajax--%>
 <script type="text/javascript">
-    //修改个人信息
-    function saveChange() {
+    //员工修改密码
+    function changePassword() {
         $.ajax({
-            url: '/user/saveChange.do?id=${sessionScope.user.id}',
-            data: $('#userChangeform').serialize(),
+            url: 'emp/changePassword.do?eid=${sessionScope.employee.id}',
+            data: $('#passwordform').serialize(),
             type: "post",
             success: function (result) {
                 if (result == 'ok') {
@@ -62,7 +62,6 @@
                     $('#messageContent').html(result);
                 }
                 $('#messageTips').modal();
-                showUserInfo();
             }
         });
     }

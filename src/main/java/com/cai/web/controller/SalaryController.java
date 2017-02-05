@@ -85,15 +85,6 @@ public class SalaryController {
         return "sal/info_detail_emp";
     }
 
-    //管理员 薪资结算页面
-    @RequestMapping(value = "/toSalaryCount.do")
-    public String toSalaryCount(Model model) {
-        List<Employee> employeeList = employeeService.findAll();
-        model.addAttribute("employeeList", employeeList);
-        model.addAttribute("employeeListCount", employeeList.size());
-        return "sal/info_add_admin";
-    }
-
     //管理员 对指定员工进行薪资结算
     @RequestMapping(value = "/salaryCount.do")
     public void salaryCount(int eid, HttpServletResponse response) throws IOException {

@@ -19,6 +19,7 @@
         <!--<property name="password" value="${jdbc.password}"/>-->
     <!--</bean>-->
 
+    <!--3.管理数据源 (改用C3P0数据库连接池)-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driverclass}"/>
         <property name="jdbcUrl" value="${jdbc.url}"/>
@@ -61,6 +62,7 @@
             <tx:method name="add*"/>
             <tx:method name="remove*"/>
             <tx:method name="update*"/>
+            <tx:method name="find*"/>
         </tx:attributes>
     </tx:advice>
 

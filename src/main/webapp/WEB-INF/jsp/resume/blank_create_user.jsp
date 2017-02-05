@@ -21,7 +21,7 @@
             <div class="am-form-group">
                 <label class="am-u-sm-3 am-form-label">电子邮件</label>
                 <div class="am-u-sm-5">
-                    ${sessionScope.user.email}
+                    <input type="email" name="email" value="${sessionScope.user.email}" disabled>
                 </div>
                 <div class="am-u-sm-4"></div>
             </div>
@@ -29,7 +29,7 @@
             <div class="am-form-group">
                 <label class="am-u-sm-3 am-form-label">手机号</label>
                 <div class="am-u-sm-5">
-                    ${sessionScope.user.phone}
+                    <input type="number" name="phone" value="${sessionScope.user.phone}" disabled>
                 </div>
                 <div class="am-u-sm-4"></div>
             </div>

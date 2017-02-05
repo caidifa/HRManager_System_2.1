@@ -3,7 +3,6 @@
 <html>
 <head>
     <title>我的薪资页面</title>
-    <script src="assets/js/amazeui.min.js"></script>
 </head>
 <body>
 
@@ -28,7 +27,7 @@
                 <th>惩罚费用</th>
                 <th>社保扣除</th>
                 <th>结算工资</th>
-                <th>状态</th>
+                <%--<th>状态</th>--%>
                 <th>操作</th>
             </tr>
             </thead>
@@ -41,10 +40,10 @@
                     <td>${sl.pCost}</td>
                     <td>${sl.sCost}</td>
                     <td>${sl.total}</td>
-                    <td>
-                        <c:if test="${empty sl.status}">未复议</c:if>
-                        <c:if test="${not empty sl.status}">有复议</c:if>
-                    </td>
+                    <%--<td>--%>
+                        <%--<c:if test="${empty sl.status}">未复议</c:if>--%>
+                        <%--<c:if test="${not empty sl.status}">有复议</c:if>--%>
+                    <%--</td>--%>
                     <td>
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
@@ -52,11 +51,11 @@
                                     <span class="am-icon-eye"></span> 详 情
                                 </a>
                             </div>
-                            <div class="am-btn-group am-btn-group-xs">
-                                <a href="javascript:reviewSal(${sl.id});" class="am-btn am-btn-warning am-btn-xs">
-                                    <span class="am-icon-question"></span> 复 议
-                                </a>
-                            </div>
+                            <%--<div class="am-btn-group am-btn-group-xs">--%>
+                                <%--<a href="javascript:reviewSal(${sl.id});" class="am-btn am-btn-warning am-btn-xs">--%>
+                                    <%--<span class="am-icon-question"></span> 复 议--%>
+                                <%--</a>--%>
+                            <%--</div>--%>
                         </div>
                     </td>
                 </tr>
@@ -86,16 +85,16 @@
         });
     }
     <%--对薪资的复议--%>
-    function reviewSal(sid) {
-        $.ajax({
-            url: 'sal/reviewSal.do?sid=' + sid,
-            type: "post",
-            success: function (result) {
-                $("#contentShow").html(result);
-                $("#contentTips").modal();
-            }
-        });
-    }
+//    function reviewSal(sid) {
+//        $.ajax({
+//            url: 'sal/reviewSal.do?sid=' + sid,
+//            type: "post",
+//            success: function (result) {
+//                $("#contentShow").html(result);
+//                $("#contentTips").modal();
+//            }
+//        });
+//    }
 </script>
 
 </body>

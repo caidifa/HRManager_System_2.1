@@ -82,6 +82,15 @@
                 }
             });
         }
+        // 员工修改密码
+        function editPassword(eid) {
+            $.ajax({
+                url: "emp/editPassword.do?eid=${sessionScope.employee.id}",
+                success: function (result) {
+                    $("#mainShow").html(result);
+                }
+            });
+        }
         // 员工注销
         function logout() {
             $('#confirmContent').html('你确定要注销吗?');
@@ -116,7 +125,9 @@
                     <span class="am-icon-caret-down"></span>
                 </a>
                 <ul class="am-dropdown-content">
-                    <li><a href="javascript:;"><span class="am-icon-pencil am-icon-fw"></span> 修改密码</a></li>
+                    <li><a href="javascript:editPassword();">
+                        <span class="am-icon-pencil am-icon-fw"></span> 修改密码</a>
+                    </li>
                     <li><a href="javascript:logout()"><span class="am-icon-sign-out am-icon-fw"></span> 注 销</a></li>
                 </ul>
             </li>

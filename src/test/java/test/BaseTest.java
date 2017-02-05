@@ -1,11 +1,9 @@
 package test;
 
-import com.cai.utils.MatchUtil;
-import com.cai.utils.MoneyUtil;
-import com.cai.utils.StringUtil;
-import com.cai.utils.TimeUtil;
+import com.cai.utils.*;
 import org.junit.Test;
 
+import javax.mail.MessagingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,8 +15,11 @@ import java.util.Date;
 public class BaseTest {
     @Test
     public void test1() throws ParseException {
-        System.out.println(MoneyUtil.saveTwoNumber(0));
-        System.out.println(MoneyUtil.saveTwoNumber(0));
+        try {
+            MailUtil.mailForPassword("我是主题1","黑,这是你的账号密码","caidifa@sina.com");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
     }
 

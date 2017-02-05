@@ -2,6 +2,7 @@ package com.cai.web.controller;
 
 import com.cai.domain.*;
 import com.cai.service.*;
+import com.cai.utils.MailUtil;
 import com.cai.utils.MatchUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -208,6 +210,49 @@ public class UserController {
         out.close();
 
     }
+
+    /**
+     * 用户通过邮箱取回密码
+     *
+     * @param mailAddress 邮箱地址
+     * @param response    响应
+     * @throws IOException 打印流异常
+     */
+    @RequestMapping(value = "/postPassword.do")
+    public void postPassword(@RequestParam("mailAddress") String mailAddress, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+
+        // 1.判断用户输入的邮箱地址是否存在
+        if ("".equals(mailAddress)) {
+            out.print("请填写邮箱!");
+            out.close();
+            return;
+        } else if (!MatchUtil.isMail(mailAddress)) {
+            out.print("错误的邮箱格式!");
+            out.close();
+            return;
+        }
+        List<User> users = userService.findByIf("email", mailAddress, 0);
+        if (users.size() == 0) {
+            out.print("该邮箱还未注册!");
+            out.close();
+            return;
+        }
+        String password = users.get(0).getPassword();
+        String object = "你的密码";
+        String content = "你在浮云梦影招聘系统注册的账号的密码为:[" + password + "]请妥善保管!";
+        try {
+            MailUtil.mailForPassword(object, content, mailAddress);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.out.println("邮件发送异常!");
+        }
+        out.print("ok");
+        out.flush();
+        out.close();
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="用户个人信息操作">
