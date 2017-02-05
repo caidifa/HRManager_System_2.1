@@ -4,6 +4,19 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
+ *
+ * 创建时的 SQL语句
+ * CREATE TABLE `traininginfo` (
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `teacherID` int(11) DEFAULT NULL,
+ * `content` varchar(255) DEFAULT NULL,
+ * `startDate` date DEFAULT NULL,
+ * `endDate` date DEFAULT NULL,
+ * `place` varchar(200) DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+ *
  * 培训详情
  */
 public class TrainingInfo implements Serializable {

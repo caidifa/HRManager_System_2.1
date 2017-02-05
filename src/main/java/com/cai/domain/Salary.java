@@ -4,6 +4,20 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
+ *
+ * 创建时的 SQL语句
+ * CREATE TABLE `salary` (
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `empID` int(11) DEFAULT NULL,
+ * `yMonth` varchar(10) DEFAULT NULL,
+ * `bCost` double(10,2) DEFAULT NULL,
+ * `pCost` double(10,2) DEFAULT NULL,
+ * `sCost` double(10,2) DEFAULT NULL,
+ * `total` double(10,2) DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+ *
  * 薪资
  */
 public class Salary implements Serializable {

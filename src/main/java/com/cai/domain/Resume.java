@@ -4,7 +4,27 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/13.
- * 简历类
+ *
+ * 创建时的 SQL语句
+ * CREATE TABLE `resume` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `userID` int(11) DEFAULT NULL,
+     `realName` varchar(20) DEFAULT NULL,
+     `idCard` varchar(18) DEFAULT NULL,
+     `sex` varchar(4) DEFAULT NULL,
+     `birthday` date DEFAULT NULL,
+     `address` varchar(255) DEFAULT NULL,
+     `married` varchar(4) DEFAULT NULL,
+     `hobby` varchar(255) DEFAULT NULL,
+     `major` varchar(20) DEFAULT NULL,
+     `education` varchar(20) DEFAULT NULL,
+     `experience` varchar(255) DEFAULT NULL,
+     `selfIntroduce` varchar(255) DEFAULT NULL,
+     `status` varchar(20) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+ *
+ * 简历
  */
 public class Resume implements Serializable {
     private int id;

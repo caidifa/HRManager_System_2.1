@@ -4,6 +4,18 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
+ *
+ * 创建时的 SQL语句
+ * CREATE TABLE `position` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `departID` int(11) DEFAULT NULL,
+     `pName` varchar(20) DEFAULT NULL,
+     `basicSalary` double(10,2) DEFAULT NULL,
+     `createTime` date DEFAULT NULL,
+     `status` varchar(20) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+ *
  * 职位
  */
 public class Position implements Serializable {

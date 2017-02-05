@@ -4,6 +4,15 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/16.
+ * 创建时的 SQL语句
+ * CREATE TABLE `faceinfo` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `faceNoticeID` int(11) DEFAULT NULL,
+     `penScores` int(11) DEFAULT NULL,
+     `faceScores` int(11) DEFAULT NULL,
+     `status` varchar(20) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
  * 面试情况
  */
 public class FaceInfo implements Serializable {

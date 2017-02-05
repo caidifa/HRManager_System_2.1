@@ -4,6 +4,21 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/13.
+ * 创建时的 SQL语句
+ * CREATE TABLE `employee` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `resumeID` int(11) DEFAULT NULL,
+     `departID` int(11) DEFAULT NULL,
+     `positionID` int(11) DEFAULT NULL,
+     `empNumber` varchar(10) DEFAULT NULL,
+     `password` varchar(20) DEFAULT NULL,
+     `salary` double(10,2) DEFAULT NULL,
+     `balance` double(10,2) DEFAULT NULL,
+     `level` int(1) DEFAULT NULL,
+     `status` varchar(20) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+ * 员工
  */
 public class Employee implements Serializable {
     private int id;

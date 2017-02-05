@@ -5,6 +5,14 @@ import java.util.List;
 
 /**
  * Created by caibaolong on 2017/1/14.
+ * 创建时的 SQL语句
+ * CREATE TABLE `department` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `dName` varchar(20) DEFAULT NULL,
+     `createTime` date DEFAULT NULL,
+     `status` varchar(20) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
  * 部门类
  */
 public class Department implements Serializable {

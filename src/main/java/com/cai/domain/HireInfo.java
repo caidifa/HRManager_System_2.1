@@ -4,6 +4,15 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
+ * 创建时的 SQL语句
+ * CREATE TABLE `hireinfo` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `departID` int(11) DEFAULT NULL,
+     `positionID` int(11) DEFAULT NULL,
+     `needNumber` int(11) DEFAULT NULL,
+     `status` varchar(20) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
  * 招聘信息
  */
 public class HireInfo implements Serializable {

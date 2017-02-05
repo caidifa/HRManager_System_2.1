@@ -4,7 +4,18 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/12.
- * 用户类
+ *
+ * 创建时的 SQL语句
+ * CREATE TABLE `user` (
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `email` varchar(50) DEFAULT NULL,
+ * `phone` varchar(11) DEFAULT NULL,
+ * `password` varchar(20) DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+ *
+ * 用户
  */
 public class User implements Serializable {
     private int id;

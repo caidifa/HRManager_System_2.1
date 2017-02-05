@@ -4,6 +4,17 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/19.
+ * 创建时的 SQL语句
+ * CREATE TABLE `checking` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `empID` int(11) DEFAULT NULL,
+     `checkDate` date DEFAULT NULL,
+     `inTime` datetime DEFAULT NULL,
+     `outTime` datetime DEFAULT NULL,
+     `result` varchar(20) DEFAULT NULL,
+     `status` varchar(20) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
  * 考勤类
  */
 public class Checking implements Serializable{

@@ -4,6 +4,17 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/15.
+ *
+ * 创建时的 SQL语句
+ * CREATE TABLE `postinfo` (
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `resumeID` int(11) DEFAULT NULL,
+ * `hireInfoID` int(11) DEFAULT NULL,
+ * `remark` varchar(20) DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+ *
  * 投递信息
  */
 public class PostInfo implements Serializable {
