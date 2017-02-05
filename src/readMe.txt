@@ -42,9 +42,8 @@
             ⑥.配置transactionManager事务管理 并通过aop(切面编程)切入进去;
 
         ⑵.配置 springmvc-servlet.xml(前端核心 servlet)
-            ①.加载 mvc所需的注解驱动;
-            ②.扫描 web下的 controller控制层;
-            ③.配置 InternalResourceViewResolver内部资源视图解析器;
+            ①.管理 web下的 controller控制层(扫描注解);
+            ②.配置 InternalResourceViewResolver内部资源视图解析器;
 
         ⑶.配置 web.xml(/webapp/WEB-INF/)
             ①.引入 spring配置文件(beans.xml);
