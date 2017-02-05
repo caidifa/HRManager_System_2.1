@@ -7,14 +7,14 @@
 
 --> 版本控制:Git
 --> 项目开源地址:
--->     1.GitHub: https://github.com/caidifa/HRManageSystem (最新v2.0) 分支idea2
+-->     1.GitHub: https://github.com/caidifa/HRManager_System_2.1 (最新v2.1)
 -->     2.码云: https://git.oschina.net/caibaolong/HRManageSystem (旧v1.2)
 ----------------------------------------------------------------------------->
 --> 设计模式:MVC
 
 --> 数据库:MySQL
 --> 连接池:C3P0(可尝试Druid)
- 撒
+
 --> 框架支持:SSM → [SpringMVC + Spring + Mybatis(采用了面向接口编程)](可尝试SSH)
 --> 后端语言:Java
 --> 前端技术:html,JavaScript,ajax,JQuery
