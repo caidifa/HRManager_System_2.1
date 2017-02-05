@@ -14,7 +14,7 @@
 
 --> 数据库:MySQL
 --> 连接池:C3P0(可尝试Druid)
-
+ 撒
 --> 框架支持:SSM → [SpringMVC + Spring + Mybatis(采用了面向接口编程)](可尝试SSH)
 --> 后端语言:Java
 --> 前端技术:html,JavaScript,ajax,JQuery
