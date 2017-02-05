@@ -136,15 +136,6 @@
             });
         }
 
-        // 显示薪资结算操作页面
-        function toSalaryCount() {
-            $.ajax({
-                url: "sal/toSalaryCount.do", success: function (result) {
-                    $("#mainShow").html(result);
-                }
-            });
-        }
-
         // 管理员注销
         function logout() {
             $('#confirmTips').modal({
@@ -181,17 +172,17 @@
                     <span class="am-badge am-badge-danger">${sessionScope.faceInfoListCount}</span>
                 </a>
             </li>
-            <li class="am-dropdown" data-am-dropdown>
-                <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:void(0);">
-                    <span class="am-icon-user"></span> 管理员个人信息
-                    <span class="am-icon-caret-down"></span>
-                </a>
-                <ul class="am-dropdown-content">
-                    <li><a href="javascript:showAdminInfo()"><span class="am-icon-eye"></span> 查 看</a></li>
-                    <li><a href="javascript:editAdminInfo()"><span class="am-icon-pencil"></span> 编 辑</a></li>
-                    <li><a href="javascript:logout()"><span class="am-icon-sign-out"></span> 注 销</a></li>
-                </ul>
-            </li>
+            <%--<li class="am-dropdown" data-am-dropdown>--%>
+                <%--<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:void(0);">--%>
+                    <%--<span class="am-icon-user"></span> 管理员个人信息--%>
+                    <%--<span class="am-icon-caret-down"></span>--%>
+                <%--</a>--%>
+                <%--<ul class="am-dropdown-content">--%>
+                    <%--<li><a href="javascript:showAdminInfo()"><span class="am-icon-eye"></span> 查 看</a></li>--%>
+                    <%--<li><a href="javascript:editAdminInfo()"><span class="am-icon-pencil"></span> 编 辑</a></li>--%>
+                    <%--<li><a href="javascript:logout()"><span class="am-icon-sign-out"></span> 注 销</a></li>--%>
+                <%--</ul>--%>
+            <%--</li>--%>
             <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span
                     class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
         </ul>
@@ -231,7 +222,7 @@
                     <a class="am-cf" data-am-collapse="{target: '#collapse-nav1'}">
                         <span class="am-icon-indent am-icon-fw"></span> 内部信息
                     </a>
-                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav1">
+                    <ul class="am-list am-collapse admin-sidebar-sub am-open" id="collapse-nav1">
                         <li>
                             <a href="javascript:showAllEmp()">
                                 <span class="am-icon-users am-icon-fw"></span> 所有员工
@@ -270,11 +261,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:toSalaryCount();">
-                        <span class="am-icon-calculator am-icon-fw"></span> 薪资 结算
+                    <a href="javascript:logout()">
+                        <span class="am-icon-sign-out am-icon-fw"></span> 注 销
                     </a>
                 </li>
-                <li><a href="javascript:logout()"><span class="am-icon-sign-out am-icon-fw"></span> 注 销</a></li>
             </ul>
 
             <div class="am-panel am-panel-default admin-sidebar-panel">

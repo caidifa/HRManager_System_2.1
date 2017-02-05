@@ -62,6 +62,7 @@
                     $('#messageContent').html(result);
                 }
                 $('#messageTips').modal();
+                showUserInfo();
             }
         });
     }

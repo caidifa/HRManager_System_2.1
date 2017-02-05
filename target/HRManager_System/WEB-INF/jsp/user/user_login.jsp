@@ -51,6 +51,25 @@
             });
         }
 
+        //用户取回密码
+        function postPassword() {
+            $.ajax({
+                url: 'user/postPassword.do',
+                data: $('#getPassword').serialize(),
+                type: "post",
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#getPasswordFail').hide();
+                        alert('已发送成功!请查看!');
+                        $('#getPasswordOK').html('已发送成功!请查看!').show();
+                    } else {
+                        $('#getPasswordOK').hide();
+                        $('#getPasswordFail').html(result).show();
+                    }
+                }
+            });
+        }
+
     </script>
 </head>
 <body>
@@ -75,7 +94,8 @@
             <%--标签名--%>
             <ul class="am-tabs-nav am-nav am-nav-tabs">
                 <li class="am-active"><a href="#tab1">登陆</a></li>
-                <li><a href="#tab2">邮箱/手机注册</a></li>
+                <li><a href="#tab2">注册</a></li>
+                <li><a href="#tab3">忘记密码</a></li>
             </ul>
 
             <%--标签内容  开始--%>
@@ -129,6 +149,28 @@
                         </div>
                         <div id="userRegisterFail" class="am-alert am-alert-warning" hidden></div>
                         <div id="userRegisterOK" class="am-alert am-alert-success" hidden></div>
+                    </form>
+                </div>
+
+                <%--标签2 取回密码--%>
+                <div class="am-tab-panel am-fade" id="tab3" align="center" style="padding: 1em 3em">
+                    <form id="getPassword" method="post" class="am-form">
+                        <br>
+                        <div class="am-form-group">
+                            <select data-am-selected="{btnSize: 'sm'}" name="getMethod">
+                                <option value="getByMail">邮箱取回</option>
+                                <option value="getByPhone">手机取回</option>
+                            </select>
+                        </div>
+                        <input type="email" name="mailAddress" placeholder="请输入已注册的邮箱">
+                        <br>
+
+                        <div class="am-cf">
+                            <a href="javascript:postPassword()"
+                               class="am-btn am-btn-success am-btn-sm am-round">发送密码</a>
+                        </div>
+                        <div id="getPasswordFail" class="am-alert am-alert-warning" hidden></div>
+                        <div id="getPasswordOK" class="am-alert am-alert-success" hidden></div>
                     </form>
                 </div>
 

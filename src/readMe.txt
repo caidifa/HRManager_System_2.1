@@ -7,7 +7,7 @@
 
 --> 版本控制:Git
 --> 项目开源地址:
--->     1.GitHub: https://github.com/caidifa/HRManageSystem (最新v2.0)
+-->     1.GitHub: https://github.com/caidifa/HRManageSystem (最新v2.0) 分支idea2
 -->     2.码云: https://git.oschina.net/caibaolong/HRManageSystem (旧v1.2)
 ----------------------------------------------------------------------------->
 --> 设计模式:MVC

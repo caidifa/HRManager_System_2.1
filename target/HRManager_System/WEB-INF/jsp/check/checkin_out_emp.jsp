@@ -19,7 +19,7 @@
                 <label class="am-u-sm-2 am-form-label">当前时间</label>
                 <div class="am-u-sm-6">
                     <h1 id="nowTime">当前时间</h1>
-                    就不改系统时间了! 通过手动设置当前时间来模拟!
+                    通过手动设置当前时间来模拟!(已禁用)
                 </div>
                 <div class="am-u-sm-4"></div>
             </div>
