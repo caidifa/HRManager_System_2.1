@@ -76,6 +76,13 @@ public class FaceController {
             postInfo.setRemark("已阅");
             postInfoService.update(postInfo);
             out.print("ok");
+            //把该投递者的其他'未读'投递信息设为'已阅'
+            int rid = postInfo.getResume().getId();
+            List<PostInfo> pis = postInfoService.findByIf("rid", null, rid);
+            for (PostInfo pi : pis) {
+                pi.setRemark("已阅");
+                postInfoService.update(pi);
+            }
         } else {
             out.print(map.get("fail"));
         }

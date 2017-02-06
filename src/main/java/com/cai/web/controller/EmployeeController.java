@@ -335,5 +335,74 @@ public class EmployeeController {
         out.close();
     }
 
+    //员工 显示个性功能页面
+    @RequestMapping(value = "/showFun.do")
+    public String showFun(int eid, Model model) {
+        Employee e = employeeService.findByIf("id", null, eid).get(0);
+        model.addAttribute("employee", e);
+        return "emp/show_fun_emp";
+    }
+
+    //员工 工资卡存钱
+    @RequestMapping(value = "/saveMoney.do")
+    public void saveMoney(int eid, double money, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        if (money <= 0) {
+            out.print("存入的金额必须大于0!");
+            out.close();
+            return;
+        }
+        Employee e = employeeService.findByIf("id", null, eid).get(0);
+        e.setBalance(e.getBalance() + money);
+        employeeService.update(e);
+        out.print("ok");
+        out.flush();
+        out.close();
+    }
+
+    //员工 工资卡取钱
+    @RequestMapping(value = "/getMoney.do")
+    public void getMoney(int eid, double money, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        if (money <= 0) {
+            out.print("取出的金额必须大于0!");
+            out.close();
+            return;
+        }
+        Employee e = employeeService.findByIf("id", null, eid).get(0);
+        double b = e.getBalance();
+        if (money > b) {
+            out.print("你的工资卡余额不足!");
+            out.close();
+            return;
+        }
+        e.setBalance(e.getBalance() - money);
+        employeeService.update(e);
+        out.print("ok");
+        out.flush();
+        out.close();
+    }
+
+    //员工 花钱升级为管理员
+    @RequestMapping(value = "/levelUp.do")
+    public void levelUp(int eid, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        PrintWriter out = response.getWriter();
+        Employee e = employeeService.findByIf("id", null, eid).get(0);
+        double b = 100000D;//升级管理员需要10万元
+        if (b > e.getBalance()) {
+            out.print("你的工资卡余额不足!(升级需要10万元)");
+            out.close();
+            return;
+        }
+        e.setBalance(e.getBalance() - b);
+        e.setLevel("1");
+        employeeService.update(e);
+        out.print("ok");
+        out.flush();
+        out.close();
+    }
 
 }

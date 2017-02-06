@@ -83,9 +83,18 @@
             });
         }
         // 员工修改密码
-        function editPassword(eid) {
+        function editPassword() {
             $.ajax({
                 url: "emp/editPassword.do?eid=${sessionScope.employee.id}",
+                success: function (result) {
+                    $("#mainShow").html(result);
+                }
+            });
+        }
+        // 显示个性功能页面
+        function showFun() {
+            $.ajax({
+                url: "emp/showFun.do?eid=${sessionScope.employee.id}",
                 success: function (result) {
                     $("#mainShow").html(result);
                 }
@@ -100,6 +109,191 @@
                 }
             });
         }
+        //时钟图表
+        $(function () {
+
+            /**
+             * Get the current time
+             */
+            function getNow() {
+                var now = new Date();
+
+                return {
+                    hours: now.getHours() + now.getMinutes() / 60,
+                    minutes: now.getMinutes() * 12 / 60 + now.getSeconds() * 12 / 3600,
+                    seconds: now.getSeconds() * 12 / 60
+                };
+            }
+
+            /**
+             * Pad numbers
+             */
+            function pad(number, length) {
+                // Create an array of the remaining length + 1 and join it with 0's
+                return new Array((length || 2) + 1 - String(number).length).join(0) + number;
+            }
+
+            var now = getNow();
+
+            // Create the chart
+            Highcharts.chart('container3', {
+
+                        chart: {
+                            type: 'gauge',
+                            plotBackgroundColor: null,
+                            plotBackgroundImage: null,
+                            plotBorderWidth: 0,
+                            plotShadow: false,
+                            height: 400
+                        },
+
+                        credits: {
+                            enabled: false
+                        },
+
+                        title: {
+                            text: '上下班别忘了打卡哦~'
+                        },
+
+                        pane: {
+                            background: [{
+                                // default background
+                            }, {
+                                // reflex for supported browsers
+                                backgroundColor: Highcharts.svg ? {
+                                    radialGradient: {
+                                        cx: 0.5,
+                                        cy: -0.4,
+                                        r: 1.9
+                                    },
+                                    stops: [
+                                        [0.5, 'rgba(255, 255, 255, 0.2)'],
+                                        [0.5, 'rgba(200, 200, 200, 0.2)']
+                                    ]
+                                } : null
+                            }]
+                        },
+
+                        yAxis: {
+                            labels: {
+                                distance: -20
+                            },
+                            min: 0,
+                            max: 12,
+                            lineWidth: 0,
+                            showFirstLabel: false,
+
+                            minorTickInterval: 'auto',
+                            minorTickWidth: 1,
+                            minorTickLength: 5,
+                            minorTickPosition: 'inside',
+                            minorGridLineWidth: 0,
+                            minorTickColor: '#666',
+
+                            tickInterval: 1,
+                            tickWidth: 2,
+                            tickPosition: 'inside',
+                            tickLength: 10,
+                            tickColor: '#666',
+                            title: {
+                                text: 'Powered by<br/>Highcharts',
+                                style: {
+                                    color: '#BBB',
+                                    fontWeight: 'normal',
+                                    fontSize: '8px',
+                                    lineHeight: '10px'
+                                },
+                                y: 10
+                            }
+                        },
+
+                        tooltip: {
+                            formatter: function () {
+                                return this.series.chart.tooltipText;
+                            }
+                        },
+
+                        series: [{
+                            data: [{
+                                id: 'hour',
+                                y: now.hours,
+                                dial: {
+                                    radius: '60%',
+                                    baseWidth: 4,
+                                    baseLength: '95%',
+                                    rearLength: 0
+                                }
+                            }, {
+                                id: 'minute',
+                                y: now.minutes,
+                                dial: {
+                                    baseLength: '95%',
+                                    rearLength: 0
+                                }
+                            }, {
+                                id: 'second',
+                                y: now.seconds,
+                                dial: {
+                                    radius: '100%',
+                                    baseWidth: 1,
+                                    rearLength: '20%'
+                                }
+                            }],
+                            animation: false,
+                            dataLabels: {
+                                enabled: false
+                            }
+                        }]
+                    },
+
+                    // Move
+                    function (chart) {
+                        setInterval(function () {
+
+                            now = getNow();
+
+                            if (chart.axes) { // not destroyed
+                                var hour = chart.get('hour'),
+                                        minute = chart.get('minute'),
+                                        second = chart.get('second'),
+                                        // run animation unless we're wrapping around from 59 to 0
+                                        animation = now.seconds === 0 ?
+                                                false : {
+                                            easing: 'easeOutBounce'
+                                        };
+
+                                // Cache the tooltip text
+                                chart.tooltipText =
+                                        pad(Math.floor(now.hours), 2) + ':' +
+                                        pad(Math.floor(now.minutes * 5), 2) + ':' +
+                                        pad(now.seconds * 5, 2);
+
+
+                                hour.update(now.hours, true, animation);
+                                minute.update(now.minutes, true, animation);
+                                second.update(now.seconds, true, animation);
+                            }
+
+                        }, 1000);
+
+                    });
+        });
+
+        /**
+         * Easing function from https://github.com/danro/easing-js/blob/master/easing.js
+         */
+        Math.easeOutBounce = function (pos) {
+            if ((pos) < (1 / 2.75)) {
+                return (7.5625 * pos * pos);
+            }
+            if (pos < (2 / 2.75)) {
+                return (7.5625 * (pos -= (1.5 / 2.75)) * pos + 0.75);
+            }
+            if (pos < (2.5 / 2.75)) {
+                return (7.5625 * (pos -= (2.25 / 2.75)) * pos + 0.9375);
+            }
+            return (7.5625 * (pos -= (2.625 / 2.75)) * pos + 0.984375);
+        };
     </script>
 </head>
 <body>
@@ -190,6 +384,11 @@
                         <span class="am-icon-credit-card am-icon-fw"></span> 打 卡 操 作
                     </a>
                 </li>
+                <li>
+                    <a href="javascript:showFun()">
+                        <span class="am-icon-star am-icon-fw"></span> 个 性 功 能
+                    </a>
+                </li>
                 <li><a href="javascript:logout()"><span class="am-icon-sign-out am-icon-fw"></span> 注 销</a></li>
             </ul>
 
@@ -202,7 +401,6 @@
                         真实姓名:${sessionScope.employee.resume.realName}<br>
                         所属部门:${sessionScope.employee.department.dName}<br>
                         在职职位:${sessionScope.employee.position.pName}<br>
-                        工资卡余额:${sessionScope.employee.balance}<br>
                     </p>
                 </div>
             </div>
@@ -214,8 +412,10 @@
     <%--主要显示区--%>
     <div class="admin-content">
 
-        <div class="admin-content-body" id="mainShow">
-            欢迎登陆来到浮云梦影-员工个人系统
+        <div class="admin-content-body" id="mainShow" style="padding: 1em">
+            <p>欢迎登陆浮云梦影员工系统!</p>
+            <div id="container3" style="width: 400px; height: 400px; margin: 10% auto"></div>
+
         </div>
 
         <footer class="admin-content-footer">
@@ -267,6 +467,8 @@
     </div>
 
 </div>
-
+<script src="code/highcharts.js"></script>
+<script src="code/highcharts-3d.js"></script>
+<script src="code/highcharts-more.js"></script>
 </body>
 </html>

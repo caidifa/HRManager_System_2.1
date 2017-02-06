@@ -114,6 +114,9 @@ public class SalaryServiceImpl implements SalaryService {
         s.setTotal(MoneyUtil.saveTwoNumber(salary));
         add(s);
         map.put("ok", e.getResume().getRealName() + "的" + yMonth + "的薪资结算成功!");
+        //打钱给该员工的工资卡内
+        e.setBalance(e.getBalance() + s.getTotal());
+        employeeService.update(e);
         return map;
     }
 }
