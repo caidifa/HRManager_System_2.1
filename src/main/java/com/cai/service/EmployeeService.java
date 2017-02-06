@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 用户业务接口
  */
 public interface EmployeeService extends BaseService<Employee> {
@@ -38,15 +39,17 @@ public interface EmployeeService extends BaseService<Employee> {
 
     /**
      * 获得日工资
-     * @param eid
-     * @return
+     *
+     * @param eid 员工id
+     * @return 该员工的日工资
      */
     double getDaySalary(int eid);
 
     /**
      * 获得小时工资
-     * @param eid
-     * @return
+     *
+     * @param eid 员工id
+     * @return 该员工的时工资
      */
     double getHourSalary(int eid);
 }

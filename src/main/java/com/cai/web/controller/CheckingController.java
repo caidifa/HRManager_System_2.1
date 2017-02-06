@@ -1,9 +1,9 @@
 package com.cai.web.controller;
 
-import com.cai.domain.Bonuspenalty;
+import com.cai.domain.BonusPenalty;
 import com.cai.domain.Checking;
 import com.cai.domain.Employee;
-import com.cai.service.BonuspenaltyService;
+import com.cai.service.BonusPenaltyService;
 import com.cai.service.CheckingService;
 import com.cai.service.EmployeeService;
 import com.cai.utils.TimeUtil;
@@ -16,12 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 考勤/奖惩操作页面控制
  */
 @Controller
@@ -32,7 +32,7 @@ public class CheckingController {
     @Resource
     private CheckingService checkingService;
     @Resource
-    private BonuspenaltyService bonuspenaltyService;
+    private BonusPenaltyService bonusPenaltyService;
 
     //<editor-fold desc="员工考勤相关操作">
     //员工 查看自己的考勤记录
@@ -110,8 +110,8 @@ public class CheckingController {
     //管理员 查看所有奖惩记录
     @RequestMapping(value = "/showAllBonus.do")
     public String showAllBonus(Model model) {
-        List<Bonuspenalty> bonuspenaltyList = bonuspenaltyService.findAll();
-        model.addAttribute("bonuspenaltyList", bonuspenaltyList);
+        List<BonusPenalty> bonusPenaltyList = bonusPenaltyService.findAll();
+        model.addAttribute("bonuspenaltyList", bonusPenaltyList);
         return "bonus/info_all_admin";
     }
 
@@ -121,9 +121,9 @@ public class CheckingController {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
 
-        Bonuspenalty b = bonuspenaltyService.findByIf("id", null, blid).get(0);
+        BonusPenalty b = bonusPenaltyService.findByIf("id", null, blid).get(0);
         b.setStatus("已处理");
-        bonuspenaltyService.update(b);
+        bonusPenaltyService.update(b);
         b.setReason("对奖惩ID为" + blid + "的复议处理");
         if ("惩罚".equals(b.getType())) {
             b.setType("奖励");
@@ -131,7 +131,7 @@ public class CheckingController {
             b.setType("惩罚");
         }
         b.setStatus(null);
-        bonuspenaltyService.add(b);
+        bonusPenaltyService.add(b);
         out.print("已处理");
         out.close();
     }
@@ -141,9 +141,9 @@ public class CheckingController {
     public void cancelReview(int blid, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
-        Bonuspenalty b = bonuspenaltyService.findByIf("id", null, blid).get(0);
+        BonusPenalty b = bonusPenaltyService.findByIf("id", null, blid).get(0);
         b.setStatus("已驳回");
-        bonuspenaltyService.update(b);
+        bonusPenaltyService.update(b);
         out.print("已驳回");
         out.close();
     }
@@ -152,8 +152,8 @@ public class CheckingController {
     //员工 查看自己的奖惩记录
     @RequestMapping(value = "/showMyBonus.do")
     public String showMyBonus(int eid, Model model) {
-        List<Bonuspenalty> bonuspenaltyList = bonuspenaltyService.findByIf("eid", null, eid);
-        model.addAttribute("bonuspenaltyList", bonuspenaltyList);
+        List<BonusPenalty> bonusPenaltyList = bonusPenaltyService.findByIf("eid", null, eid);
+        model.addAttribute("bonuspenaltyList", bonusPenaltyList);
         return "bonus/info_show_emp";
     }
 
@@ -167,17 +167,17 @@ public class CheckingController {
 
     //员工 复议确认
     @RequestMapping(value = "/reviewConfirm.do")
-    public void reviewConfirm(Bonuspenalty bonuspenalty, HttpServletResponse response) throws IOException {
+    public void reviewConfirm(BonusPenalty bonusPenalty, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
-        if ("".equals(bonuspenalty.getStatus())) {
+        if ("".equals(bonusPenalty.getStatus())) {
             out.print("复议内容不能为空!");
             out.close();
             return;
         }
-        Bonuspenalty bp = bonuspenaltyService.findByIf("id", null, bonuspenalty.getId()).get(0);
-        bp.setStatus(bonuspenalty.getStatus());
-        bonuspenaltyService.update(bp);
+        BonusPenalty bp = bonusPenaltyService.findByIf("id", null, bonusPenalty.getId()).get(0);
+        bp.setStatus(bonusPenalty.getStatus());
+        bonusPenaltyService.update(bp);
         out.print("ok");
         out.close();
     }
@@ -192,7 +192,7 @@ public class CheckingController {
 
     //管理员 奖惩的添加确认
     @RequestMapping(value = "/addBPConfirm.do")
-    public void addBPConfirm(Bonuspenalty bp, int eid, HttpServletResponse response) throws IOException {
+    public void addBPConfirm(BonusPenalty bp, int eid, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
         if (eid == 0) {
@@ -214,7 +214,7 @@ public class CheckingController {
         e.setId(eid);
         bp.setEmployee(e);
         bp.setTime(TimeUtil.nowForYMD());
-        bonuspenaltyService.add(bp);
+        bonusPenaltyService.add(bp);
         out.print("ok");
         out.close();
     }

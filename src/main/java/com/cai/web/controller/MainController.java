@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 主要页面管理
  */
 @Controller
@@ -28,10 +29,6 @@ public class MainController {
         return "user/user_main";
     }
 
-
-
-
-
     //去员工登陆页面
     @RequestMapping(value = "/goEmpLogin.do")
     public String goEmpLogin() {
@@ -49,6 +46,5 @@ public class MainController {
     public String goAdminMain() {
         return "/emp/admin_main";
     }
-
 
 }

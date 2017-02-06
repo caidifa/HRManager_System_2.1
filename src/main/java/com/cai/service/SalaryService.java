@@ -7,8 +7,9 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/20.
+ * <p>
+ * 薪资的业务基本接口
  */
-
 public interface SalaryService extends BaseService<Salary> {
     @Override
     boolean add(Salary salary);
@@ -29,9 +30,10 @@ public interface SalaryService extends BaseService<Salary> {
 
     /**
      * 结算薪资
-     * @param eid 要结算的员工id
+     *
+     * @param eid    要结算的员工id
      * @param yMonth 要结算的年月
      * @return 结算情况
      */
-    Map<String, Object> addSalary(int eid,String yMonth);
+    Map<String, Object> addSalary(int eid, String yMonth);
 }

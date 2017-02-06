@@ -1,11 +1,13 @@
 package com.cai.web.controller;
 
-import com.cai.domain.*;
+import com.cai.domain.FaceInfo;
+import com.cai.domain.FaceNotice;
+import com.cai.domain.HireInfo;
+import com.cai.domain.User;
 import com.cai.service.*;
 import com.cai.utils.MailUtil;
 import com.cai.utils.MatchUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,21 +22,17 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 用户操作控制
  */
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
     //<editor-fold desc="所需的业务接口">
     @Resource
     private UserService userService;
     @Resource
     private HireInfoService hireInfoService;
-    @Resource
-    private DepartmentService departmentService;
-    @Resource
-    private PostInfoService postInfoService;
     @Resource
     private FaceNoticeService faceNoticeService;
     @Resource

@@ -7,27 +7,24 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 简历的业务基本接口
  */
 public interface ResumeService extends BaseService<Resume> {
-
+    @Override
     boolean add(Resume resume);
 
+    @Override
     boolean remove(Resume resume);
 
+    @Override
     boolean update(Resume resume);
 
+    @Override
     List<Resume> findAll();
 
+    @Override
     List<Resume> findByIf(String ifName, String content, int id);
-
-    /**
-     * 通过用户id查找
-     *
-     * @param resume 带有user属性的简历
-     * @return 满足条件的简历
-     */
-    Resume findByUserID(Resume resume);
 
     /**
      * 创建简历
@@ -44,7 +41,5 @@ public interface ResumeService extends BaseService<Resume> {
      * @return 修改情况回馈
      */
     Map<String, Object> updateByEdit(Resume resume);
-
-
 
 }

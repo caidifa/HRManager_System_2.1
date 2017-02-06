@@ -3,6 +3,7 @@ package test;
 import com.cai.dao.*;
 import com.cai.domain.*;
 import com.cai.service.*;
+import com.cai.utils.TimeUtil;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -108,7 +109,7 @@ public class DemoTest {
     // 测试 3
     @Test
     public void test8() {
-
+        System.out.println(TimeUtil.getCountDate("2017-02"));
     }
 
     // 测试 3

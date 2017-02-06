@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 用户业务接口
  */
 public interface FaceInfoService extends BaseService<FaceInfo> {
@@ -28,9 +29,8 @@ public interface FaceInfoService extends BaseService<FaceInfo> {
 
     /**
      * 用户查找自己的面试情况(有status条件)
-     * OK
      *
-     * @param user 用户
+     * @param user   用户
      * @param status 状态
      * @return 找到的面试情况集合
      */

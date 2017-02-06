@@ -1,7 +1,6 @@
 package com.cai.utils;
 
 import javax.mail.*;
-import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -20,7 +19,7 @@ public class MailUtil {
      * @param address 目标地址
      * @throws MessagingException 邮件发送时异常
      */
-    public static void mailForPassword(String subject,String content,String address) throws MessagingException {
+    public static void mailForPassword(String subject, String content, String address) throws MessagingException {
         Properties props = new Properties();
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");

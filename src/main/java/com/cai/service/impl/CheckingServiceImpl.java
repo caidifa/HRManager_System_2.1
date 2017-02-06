@@ -1,10 +1,10 @@
 package com.cai.service.impl;
 
 import com.cai.dao.CheckingDao;
-import com.cai.domain.Bonuspenalty;
+import com.cai.domain.BonusPenalty;
 import com.cai.domain.Checking;
 import com.cai.domain.Employee;
-import com.cai.service.BonuspenaltyService;
+import com.cai.service.BonusPenaltyService;
 import com.cai.service.CheckingService;
 import com.cai.service.EmployeeService;
 import com.cai.utils.StringUtil;
@@ -19,7 +19,8 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/15.
- * 考勤打卡的业务处理
+ * <p>
+ * 考勤打卡的业务接口实现
  */
 @Service
 public class CheckingServiceImpl implements CheckingService {
@@ -27,7 +28,7 @@ public class CheckingServiceImpl implements CheckingService {
     private CheckingDao checkingDao;
 
     @Resource
-    private BonuspenaltyService bonuspenaltyService;
+    private BonusPenaltyService bonusPenaltyService;
 
     @Resource
     private EmployeeService employeeService;
@@ -55,25 +56,22 @@ public class CheckingServiceImpl implements CheckingService {
     @Override
     public List<Checking> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<Checking> list = checkingDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return checkingDao.find(map);
     }
 
+    //<editor-fold desc="上下班打卡处理">
     /**
      * 判断上班打卡时间的情况
      *
      * @param inTime 打卡时间
      * @return 情况(正常到, 迟到了[几小时])
+     * @throws ParseException 时间转化异常
      */
     @Override
     public Map<String, Object> isLate(String inTime) throws ParseException {
         Map map = new HashedMap();
-        //获得当日上班时间 自定为上午09:00:00
+        //获得当日上班时间 自定义为上午09:00:00
         String workInTime = TimeUtil.getWorkInTime(inTime);
         //判断是否迟到
         if (TimeUtil.timeCompare(inTime, workInTime) < 0) {
@@ -91,7 +89,7 @@ public class CheckingServiceImpl implements CheckingService {
      * @param eid    上班打卡的员工id
      * @param inTime 上班打卡的时间
      * @return map key: ok正常到 否则是迟到 , 迟到则返回迟到小时数
-     * @throws ParseException
+     * @throws ParseException 时间转化异常
      */
     @Override
     public Map<String, Object> addInTime(int eid, String inTime) throws ParseException {
@@ -119,7 +117,7 @@ public class CheckingServiceImpl implements CheckingService {
         } else {
             checking.setResult("迟到了");
             //产生惩罚
-            Bonuspenalty b = new Bonuspenalty();
+            BonusPenalty b = new BonusPenalty();
             b.setEmployee(emp);
             b.setTime(checkDate);
             b.setType("惩罚");
@@ -135,7 +133,7 @@ public class CheckingServiceImpl implements CheckingService {
                 //设置惩罚金额为日工资
                 b.setMoney(employeeService.getHourSalary(eid) * 2 * i);
             }
-            bonuspenaltyService.add(b);
+            bonusPenaltyService.add(b);
         }
         add(checking);
         return map;
@@ -146,6 +144,7 @@ public class CheckingServiceImpl implements CheckingService {
      *
      * @param outTime 打卡时间
      * @return 情况(正常退, 早退了, 加班了)
+     * @throws ParseException 时间转化异常
      */
     @Override
     public Map<String, Object> isEarly(String outTime) throws ParseException {
@@ -174,7 +173,7 @@ public class CheckingServiceImpl implements CheckingService {
      * @param eid     下班打卡的员工id
      * @param outTime 下班打卡的时间
      * @return map key: ok正常退 否则是早退
-     * @throws ParseException
+     * @throws ParseException 时间转化异常
      */
     @Override
     public Map<String, Object> addOutTime(int eid, String outTime) throws ParseException {
@@ -202,7 +201,7 @@ public class CheckingServiceImpl implements CheckingService {
             map.clear();
             map.put("ok", "打卡成功!路上小心!");
         } else {
-            Bonuspenalty b = new Bonuspenalty();
+            BonusPenalty b = new BonusPenalty();
             b.setEmployee(ck.getEmployee());
             b.setTime(checkDate);
 
@@ -227,11 +226,12 @@ public class CheckingServiceImpl implements CheckingService {
                 map.clear();
                 map.put("ok", "打卡成功!加班了" + i + "小时!");
             }
-            bonuspenaltyService.add(b);
+            bonusPenaltyService.add(b);
         }
         update(ck);
         return map;
     }
+    //</editor-fold>
 
     /**
      * 得到指定员工指定年月的未工作天数

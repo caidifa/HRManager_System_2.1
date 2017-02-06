@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/15.
- *
+ * <p>
+ * 投递信息
+ * <p>
  * 创建时的 SQL语句
  * CREATE TABLE `postinfo` (
  * `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -14,16 +16,14 @@ import java.io.Serializable;
  * `status` varchar(20) DEFAULT NULL,
  * PRIMARY KEY (`id`)
  * ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
- *
- * 投递信息
  */
 public class PostInfo implements Serializable {
     private int id;
-    private String remark;//阅读标记
-    private String status;//状态
+    private String remark;      //阅读标记
+    private String status;      //状态
 
-    private Resume resume;//简历
-    private HireInfo hireInfo;//招聘信息
+    private Resume resume;      //简历
+    private HireInfo hireInfo;  //招聘信息
 
     public PostInfo() {
     }
@@ -80,12 +80,12 @@ public class PostInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "PostInfo{" +
+        return "<--PostInfo{" +
                 "id=" + id +
                 ", remark='" + remark + '\'' +
                 ", status='" + status + '\'' +
-                ", \nresume=" + resume +
-                ", \nhireInfo=" + hireInfo +
+                ", \n-->resume=" + resume +
+                ", \n-->hireInfo=" + hireInfo +
                 '}';
     }
 }

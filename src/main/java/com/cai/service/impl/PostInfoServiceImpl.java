@@ -16,6 +16,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/15.
+ * <p>
  * 投递信息的业务处理
  */
 @Service
@@ -48,19 +49,14 @@ public class PostInfoServiceImpl implements PostInfoService {
     @Override
     public List<PostInfo> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<PostInfo> list = postInfoDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return postInfoDao.find(map);
     }
 
     /**
      * 用户选择招聘信息投递简历→生成投递信息
      *
-     * @param resume 用户简历
+     * @param resume   用户简历
      * @param hireInfo 用户选择的招聘信息
      * @return 回馈投递情况
      */
@@ -69,7 +65,7 @@ public class PostInfoServiceImpl implements PostInfoService {
         Map map = new HashMap();
         map.put("rid", resume.getId());
         map.put("hid", hireInfo.getId());
-        if (postInfoDao.find(map).size()>0) {
+        if (postInfoDao.find(map).size() > 0) {
             map.clear();
             map.put("fail", "你已经投递过此项招聘!");
             return map;
@@ -86,7 +82,6 @@ public class PostInfoServiceImpl implements PostInfoService {
 
     /**
      * 得到详细的投递信息
-     * OK
      *
      * @param postInfo 投递信息
      * @return 详细的投递信息

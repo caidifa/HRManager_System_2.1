@@ -8,7 +8,8 @@ import java.util.List;
 
 /**
  * Created by caibaolong on 2017/1/12.
- * 培训的业务基本接口
+ * <p>
+ * 培训与员工关联的业务基本接口
  */
 public interface TrainingService extends BaseService<Training> {
     @Override
@@ -39,6 +40,7 @@ public interface TrainingService extends BaseService<Training> {
      *
      * @param eid 员工id
      * @return 培训信息的集合 size为0说明没有
+     * @throws ParseException 日期转化异常
      */
     List<TrainingInfo> findNowByEid(int eid) throws ParseException;
 }

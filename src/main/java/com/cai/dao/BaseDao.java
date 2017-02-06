@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
- *
+ * <p>
  * 接口编程基本接口
  *
  * @param <T> 泛型用于解耦,同时避免写重复代码
@@ -42,13 +42,5 @@ public interface BaseDao<T> {
      * @return 返回该对应的对象集合
      */
     List<T> find(Map map);
-
-    // /**
-    //  * 通过map查找对象 单纯查找不带内部对象
-    //  *
-    //  * @param map 存放查询的对象的条件,为null时为查询所有
-    //  * @return 返回该对应的对象集合
-    //  */
-    // List<T> findOnly(Map map);
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 简历的业务基本接口
  */
 public interface PositionService extends BaseService<Position> {

@@ -15,7 +15,8 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/15.
- * 面试通知的业务处理
+ * <p>
+ * 面试通知的业务处理接口实现
  */
 @Service
 public class FaceNoticeServiceImpl implements FaceNoticeService {
@@ -60,13 +61,8 @@ public class FaceNoticeServiceImpl implements FaceNoticeService {
     @Override
     public List<FaceNotice> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<FaceNotice> list = faceNoticeDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return faceNoticeDao.find(map);
     }
 
     @Override
@@ -79,6 +75,7 @@ public class FaceNoticeServiceImpl implements FaceNoticeService {
      *
      * @param faceNotice 新建的面试通知
      * @return 新建情况
+     * @throws ParseException 日期转化异常
      */
     @Override
     public Map<String, Object> addByCreate(FaceNotice faceNotice) throws ParseException {
@@ -172,8 +169,8 @@ public class FaceNoticeServiceImpl implements FaceNoticeService {
     public FaceNotice findDetail(FaceNotice faceNotice) {
         int eid = faceNotice.getEmployee().getId();
         Employee employee = employeeService.findByIf("id", null, eid).get(0);
-        int postid = faceNotice.getPostInfo().getId();
-        PostInfo postInfo = postInfoService.findByIf("id", null, postid).get(0);
+        int postId = faceNotice.getPostInfo().getId();
+        PostInfo postInfo = postInfoService.findByIf("id", null, postId).get(0);
         HireInfo hireInfo = hireInfoService.findByIf("id", null, postInfo.getHireInfo().getId()).get(0);
         postInfo.setHireInfo(hireInfo);
         faceNotice.setEmployee(employee);

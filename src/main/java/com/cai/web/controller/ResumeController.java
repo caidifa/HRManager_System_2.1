@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 简历操作控制
  */
 @Controller
@@ -24,7 +25,6 @@ import java.util.Map;
 public class ResumeController {
     @Resource
     private ResumeService resumeService;
-
     @Resource
     private UserService userService;
 
@@ -37,8 +37,8 @@ public class ResumeController {
     /**
      * 用户填写好简历后保存 → 验证输入的信息 → service进行添加 → 回馈信息给页面
      *
-     * @param resume 用户在页面输入的简历信息
-     * @param session 域对象更新
+     * @param resume   用户在页面输入的简历信息
+     * @param session  域对象更新
      * @param response 响应结果
      * @throws IOException 输出异常
      */
@@ -133,8 +133,8 @@ public class ResumeController {
     /**
      * 用户修改好简历后保存 → 验证输入的信息 → service进行修改 → 回馈信息给页面
      *
-     * @param resume 用户在页面修改的简历信息
-     * @param session 域对象更新
+     * @param resume   用户在页面修改的简历信息
+     * @param session  域对象更新
      * @param response 响应结果
      * @throws IOException 输出异常
      */

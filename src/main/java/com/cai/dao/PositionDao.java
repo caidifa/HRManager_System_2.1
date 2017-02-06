@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 职位数据库操作接口
  */
 @Repository
@@ -26,6 +27,7 @@ public interface PositionDao extends BaseDao<Position> {
 
     /**
      * 通过部门id查找
+     *
      * @param position 带有部门的职位
      * @return 满足条件的职位
      */

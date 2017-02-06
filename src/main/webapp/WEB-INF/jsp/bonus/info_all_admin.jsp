@@ -10,7 +10,7 @@
 <div class="am-cf am-padding am-padding-bottom-0">
     <div class="am-fl am-cf">
         <strong class="am-text-primary am-text-lg">奖惩信息</strong> /
-        <small>Bonuspenalty Info</small>
+        <small>BonusPenalty Info</small>
     </div>
 </div>
 <hr/>
@@ -40,7 +40,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="bl" items="${requestScope.bonuspenaltyList}">
+            <c:forEach var="bl" items="${requestScope.bonusPenaltyList}">
                 <tr>
                     <td>${bl.id}</td>
                     <td>${bl.employee.empNumber}</td>

@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
- *
+ * <p>
+ * 培训详情
+ * <p>
  * 创建时的 SQL语句
  * CREATE TABLE `traininginfo` (
  * `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -16,18 +18,16 @@ import java.io.Serializable;
  * `status` varchar(20) DEFAULT NULL,
  * PRIMARY KEY (`id`)
  * ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
- *
- * 培训详情
  */
 public class TrainingInfo implements Serializable {
     private int id;
-    private String content;//培训内容
-    private String startDate;//培训开始时间
-    private String endDate;//培训结束时间
-    private String place;//培训地点
-    private String status;//状态
+    private String content;     //培训内容
+    private String startDate;   //培训开始时间
+    private String endDate;     //培训结束时间
+    private String place;       //培训地点
+    private String status;      //状态
 
-    private Employee teacher;//培训老师
+    private Employee teacher;   //培训老师
 
     public TrainingInfo() {
     }

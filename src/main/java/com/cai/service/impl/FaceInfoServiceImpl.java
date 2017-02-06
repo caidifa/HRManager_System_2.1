@@ -17,6 +17,8 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/15.
+ * <p>
+ * 面试情况业务处理接口实现
  */
 @Service
 public class FaceInfoServiceImpl implements FaceInfoService {
@@ -49,20 +51,14 @@ public class FaceInfoServiceImpl implements FaceInfoService {
     @Override
     public List<FaceInfo> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<FaceInfo> list = faceInfoDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return faceInfoDao.find(map);
     }
 
     /**
      * 用户查找自己的面试情况(有status条件)
-     * OK
      *
-     * @param user 用户
+     * @param user   用户
      * @param status 状态
      * @return 找到的面试情况集合
      */
@@ -81,7 +77,7 @@ public class FaceInfoServiceImpl implements FaceInfoService {
             map.put("fnid", faceNotice.getId());
             map.put("status", status);
             List<FaceInfo> faceInfos = faceInfoDao.find(map);
-            if (faceInfos.size()>0) {
+            if (faceInfos.size() > 0) {
                 list.add(faceInfos.get(0));
             }
         }

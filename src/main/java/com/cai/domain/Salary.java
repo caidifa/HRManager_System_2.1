@@ -4,8 +4,11 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
- *
+ * <p>
  * 创建时的 SQL语句
+ * <p>
+ * 薪资
+ * <p>
  * CREATE TABLE `salary` (
  * `id` int(11) NOT NULL AUTO_INCREMENT,
  * `empID` int(11) DEFAULT NULL,
@@ -17,19 +20,17 @@ import java.io.Serializable;
  * `status` varchar(20) DEFAULT NULL,
  * PRIMARY KEY (`id`)
  * ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
- *
- * 薪资
  */
 public class Salary implements Serializable {
     private int id;
-    private String yMonth;//年月份
-    private double bCost;//奖励费用
-    private double pCost;//惩罚费用
-    private double sCost;//社保扣除
-    private double total;//结算工资
-    private String status;//状态
+    private String yMonth;      //年月份
+    private double bCost;       //奖励费用
+    private double pCost;       //惩罚费用
+    private double sCost;       //社保扣除
+    private double total;       //结算工资
+    private String status;      //状态
 
-    private Employee employee;//员工
+    private Employee employee;  //员工
 
     public Salary() {
     }

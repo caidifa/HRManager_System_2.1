@@ -153,7 +153,7 @@
                         <span class="am-icon-user am-icon-fw"></span> 个 人 相 关
                         <span class="am-icon-angle-right am-fr am-margin-right"></span>
                     </a>
-                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                    <ul class="am-list am-collapse admin-sidebar-sub am-open" id="collapse-nav">
                         <li>
                             <a href="javascript:showMyTrainInfo(${sessionScope.employee.id})" class="am-cf">
                                 <span class="am-icon-empire am-icon-fw"></span> 个 人 培 训

@@ -1,13 +1,12 @@
 package com.cai.web.controller;
 
-import com.cai.domain.Bonuspenalty;
+import com.cai.domain.BonusPenalty;
 import com.cai.domain.Employee;
 import com.cai.domain.Salary;
-import com.cai.service.BonuspenaltyService;
+import com.cai.service.BonusPenaltyService;
 import com.cai.service.CheckingService;
 import com.cai.service.EmployeeService;
 import com.cai.service.SalaryService;
-import com.cai.utils.MoneyUtil;
 import com.cai.utils.TimeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,18 +22,18 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 薪资操作控制
  */
 @Controller
 @RequestMapping("/sal")
 public class SalaryController {
-
     @Resource
     private EmployeeService employeeService;
     @Resource
     private CheckingService checkingService;
     @Resource
-    private BonuspenaltyService bonuspenaltyService;
+    private BonusPenaltyService bonusPenaltyService;
     @Resource
     private SalaryService salaryService;
 
@@ -68,9 +67,9 @@ public class SalaryController {
         map.put("eid", eid);
         map.put("time", salary.getyMonth() + "%");
         map.put("type", "奖励");
-        List<Bonuspenalty> bonusList = bonuspenaltyService.findByMap(map);
+        List<BonusPenalty> bonusList = bonusPenaltyService.findByMap(map);
         map.put("type", "惩罚");
-        List<Bonuspenalty> penaltyList = bonuspenaltyService.findByMap(map);
+        List<BonusPenalty> penaltyList = bonusPenaltyService.findByMap(map);
         int notGoDays = checkingService.getDaysByEid(eid, salary.getyMonth());
         model.addAttribute("goDays", 22 - notGoDays);
         model.addAttribute("notGoDays", notGoDays);

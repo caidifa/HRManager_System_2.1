@@ -1,9 +1,5 @@
 package com.cai.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * Created by caibaolong on 2017/1/23.
  * 有关验证的工具
@@ -36,7 +32,7 @@ public class MatchUtil {
      * @return 如果正确则返回身份证号上的出生年月
      */
     public static String isIdCard(String idCard) {
-        if (idCard.length()!=18) {
+        if (idCard.length() != 18) {
             return null;
         }
         String year = idCard.substring(6, 10);

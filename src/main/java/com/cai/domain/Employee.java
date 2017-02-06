@@ -4,34 +4,36 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/13.
+ * <p>
+ * 员工
+ * <p>
  * 创建时的 SQL语句
  * CREATE TABLE `employee` (
-     `id` int(11) NOT NULL AUTO_INCREMENT,
-     `resumeID` int(11) DEFAULT NULL,
-     `departID` int(11) DEFAULT NULL,
-     `positionID` int(11) DEFAULT NULL,
-     `empNumber` varchar(10) DEFAULT NULL,
-     `password` varchar(20) DEFAULT NULL,
-     `salary` double(10,2) DEFAULT NULL,
-     `balance` double(10,2) DEFAULT NULL,
-     `level` int(1) DEFAULT NULL,
-     `status` varchar(20) DEFAULT NULL,
-     PRIMARY KEY (`id`)
-   ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
- * 员工
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `resumeID` int(11) DEFAULT NULL,
+ * `departID` int(11) DEFAULT NULL,
+ * `positionID` int(11) DEFAULT NULL,
+ * `empNumber` varchar(10) DEFAULT NULL,
+ * `password` varchar(20) DEFAULT NULL,
+ * `salary` double(10,2) DEFAULT NULL,
+ * `balance` double(10,2) DEFAULT NULL,
+ * `level` int(1) DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
  */
 public class Employee implements Serializable {
     private int id;
-    private String empNumber;//员工编号
-    private String password;//员工密码
-    private double salary;//薪水
-    private double balance;//工资卡余额
-    private String level;//等级
-    private String status;//状态
+    private String empNumber;       //员工编号
+    private String password;        //员工密码
+    private double salary;          //薪水
+    private double balance;         //工资卡余额
+    private String level;           //等级
+    private String status;          //状态
 
-    private Resume resume;//简历
-    private Department department;//部门
-    private Position position;//职位
+    private Resume resume;          //简历
+    private Department department;  //部门
+    private Position position;      //职位
 
     public Employee() {
     }
@@ -133,7 +135,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "<--Employee{" +
                 "id=" + id +
                 ", empNumber='" + empNumber + '\'' +
                 ", password='" + password + '\'' +
@@ -141,9 +143,9 @@ public class Employee implements Serializable {
                 ", balance=" + balance +
                 ", level='" + level + '\'' +
                 ", status='" + status + '\'' +
-                ", \nresume=" + resume +
-                ", \ndepartment=" + department +
-                ", \nposition=" + position +
+                ", \n-->resume=" + resume +
+                ", \n-->department=" + department +
+                ", \n-->position=" + position +
                 '}';
     }
 }

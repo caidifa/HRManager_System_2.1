@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 用户业务接口
  */
 public interface UserService extends BaseService<User> {

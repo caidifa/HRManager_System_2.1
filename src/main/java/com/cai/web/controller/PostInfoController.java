@@ -11,7 +11,6 @@ import com.cai.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -24,12 +23,12 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 投递信息操作控制
  */
 @Controller
 @RequestMapping("/post")
 public class PostInfoController {
-
     //<editor-fold desc="所需的业务处理对象">
     @Resource
     private PostInfoService postInfoService;
