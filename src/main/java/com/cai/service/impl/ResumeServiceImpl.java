@@ -13,15 +13,13 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 简历业务处理接口实现
  */
 @Service
 public class ResumeServiceImpl implements ResumeService {
     @Resource
     private ResumeDao resumeDao;
-
-    @Resource
-    private UserDao userDao;
 
     public boolean add(Resume resume) {
         return resumeDao.add(resume) > 0;
@@ -41,17 +39,8 @@ public class ResumeServiceImpl implements ResumeService {
 
     public List<Resume> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
+        map.put(ifName, id != 0 ? id : content);
         return resumeDao.find(map);
-    }
-
-    public Resume findByUserID(Resume resume) {
-        Resume byUserId = resumeDao.findByUserID(resume);
-        return byUserId != null ? byUserId : null;
     }
 
     /**

@@ -13,15 +13,22 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/15.
+ * <p>
+ * 部门业务处理接口实现
  */
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private DepartmentDao departmentDao;
 
-    //添加部门时 保持部门名唯一
+    /**
+     * 添加部门时 保持部门名唯一
+     * @param department 要添加的部门
+     * @return 添加成功是否
+     */
     @Override
     public boolean add(Department department) {
+        //判断部门名是否有重复
         if (findByIf("dName", department.getdName(), 0).size() > 0) {
             return false;
         }
@@ -35,7 +42,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDao.remove(department) > 0;
     }
 
-    //修改部门时 保持部门名唯一
+    /**
+     * 修改部门时 保持部门名唯一
+     * @param department 要修改的部门
+     * @return 修改成功是否
+     */
     @Override
     public boolean update(Department department) {
         String dName = department.getdName();
@@ -55,13 +66,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<Department> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<Department> list = departmentDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return departmentDao.find(map);
     }
 
 }

@@ -4,44 +4,44 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/13.
- *
+ * <p>
+ * 简历
+ * <p>
  * 创建时的 SQL语句
  * CREATE TABLE `resume` (
-     `id` int(11) NOT NULL AUTO_INCREMENT,
-     `userID` int(11) DEFAULT NULL,
-     `realName` varchar(20) DEFAULT NULL,
-     `idCard` varchar(18) DEFAULT NULL,
-     `sex` varchar(4) DEFAULT NULL,
-     `birthday` date DEFAULT NULL,
-     `address` varchar(255) DEFAULT NULL,
-     `married` varchar(4) DEFAULT NULL,
-     `hobby` varchar(255) DEFAULT NULL,
-     `major` varchar(20) DEFAULT NULL,
-     `education` varchar(20) DEFAULT NULL,
-     `experience` varchar(255) DEFAULT NULL,
-     `selfIntroduce` varchar(255) DEFAULT NULL,
-     `status` varchar(20) DEFAULT NULL,
-     PRIMARY KEY (`id`)
-   ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
- *
- * 简历
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `userID` int(11) DEFAULT NULL,
+ * `realName` varchar(20) DEFAULT NULL,
+ * `idCard` varchar(18) DEFAULT NULL,
+ * `sex` varchar(4) DEFAULT NULL,
+ * `birthday` date DEFAULT NULL,
+ * `address` varchar(255) DEFAULT NULL,
+ * `married` varchar(4) DEFAULT NULL,
+ * `hobby` varchar(255) DEFAULT NULL,
+ * `major` varchar(20) DEFAULT NULL,
+ * `education` varchar(20) DEFAULT NULL,
+ * `experience` varchar(255) DEFAULT NULL,
+ * `selfIntroduce` varchar(255) DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
  */
 public class Resume implements Serializable {
     private int id;
-    private String realName;//真实姓名
-    private String idCard;//身份证号
-    private String sex;//性别
-    private String birthday;//出生年月
-    private String address;//住址
-    private String married;//婚姻状况
-    private String hobby;//爱好
-    private String major;//专业
-    private String education;//教育程度
-    private String experience;//工作经验
-    private String selfIntroduce;//自我介绍
-    private String status;//状态
+    private String realName;        //真实姓名
+    private String idCard;          //身份证号
+    private String sex;             //性别
+    private String birthday;        //出生年月
+    private String address;         //住址
+    private String married;         //婚姻状况
+    private String hobby;           //爱好
+    private String major;           //专业
+    private String education;       //教育程度
+    private String experience;      //工作经验
+    private String selfIntroduce;   //自我介绍
+    private String status;          //状态
 
-    private User user;//用户
+    private User user;              //用户
 
     public Resume() {
     }
@@ -179,7 +179,7 @@ public class Resume implements Serializable {
 
     @Override
     public String toString() {
-        return "Resume{" +
+        return "<--Resume{" +
                 "id=" + id +
                 ", realName='" + realName + '\'' +
                 ", idCard='" + idCard + '\'' +
@@ -193,7 +193,7 @@ public class Resume implements Serializable {
                 ", experience='" + experience + '\'' +
                 ", selfIntroduce='" + selfIntroduce + '\'' +
                 ", status='" + status + '\'' +
-                ", \nuser=" + user +
+                ", \n-->user=" + user +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package com.cai.service;
 
-import com.cai.domain.Employee;
 import com.cai.domain.FaceNotice;
 import com.cai.domain.User;
 
@@ -29,21 +28,21 @@ public interface FaceNoticeService extends BaseService<FaceNotice> {
     @Override
     List<FaceNotice> findByIf(String ifName, String content, int id);
 
-    List<FaceNotice> findByMap(Map<String,Object> map);
+    List<FaceNotice> findByMap(Map<String, Object> map);
 
     /**
      * 创建面试通知
      *
      * @param faceNotice 新建的面试通知
      * @return 新建情况
+     * @throws ParseException 时间转化异常
      */
-    Map<String,Object> addByCreate(FaceNotice faceNotice) throws ParseException;
+    Map<String, Object> addByCreate(FaceNotice faceNotice) throws ParseException;
 
     /**
      * 用户查找自己的面试通知(status条件)
-     * OK
      *
-     * @param user 用户
+     * @param user   用户
      * @param status 状态
      * @return 找到的面试通知集合
      */
@@ -51,7 +50,6 @@ public interface FaceNoticeService extends BaseService<FaceNotice> {
 
     /**
      * 得到详细的面试通知
-     * OK
      *
      * @param faceNotice 面试通知
      * @return 详细的面试通知

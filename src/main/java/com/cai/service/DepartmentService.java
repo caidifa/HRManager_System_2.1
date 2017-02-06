@@ -7,7 +7,8 @@ import java.util.List;
 
 /**
  * Created by caibaolong on 2017/1/12.
- * 简历的业务基本接口
+ * <p>
+ * 部门的业务基本接口
  */
 public interface DepartmentService extends BaseService<Department> {
     @Override

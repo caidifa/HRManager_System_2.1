@@ -1,9 +1,10 @@
 package test;
 
-import com.cai.dao.BonuspenaltyDao;
+import com.cai.dao.BonusPenaltyDao;
 import com.cai.dao.CheckingDao;
-import com.cai.domain.Bonuspenalty;
+import com.cai.domain.BonusPenalty;
 import com.cai.domain.Checking;
+import com.cai.service.BonusPenaltyService;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -30,20 +31,22 @@ public class CheckingTest {
 
     @Test
     public void test2() {
-        BonuspenaltyDao bd = new ClassPathXmlApplicationContext("beans.xml").getBean(BonuspenaltyDao.class);
+        BonusPenaltyDao bd = new ClassPathXmlApplicationContext("beans.xml").getBean(BonusPenaltyDao.class);
         Map map = new HashMap();
         map.put("timeLike", "2017-02-10");
-        List<Bonuspenalty> bonuspenaltyList = bd.find(map);
-        for (Bonuspenalty bonuspenalty : bonuspenaltyList) {
-            System.out.println(bonuspenalty);
+        List<BonusPenalty> bonusPenaltyList = bd.find(map);
+        for (BonusPenalty bonusPenalty : bonusPenaltyList) {
+            System.out.println(bonusPenalty);
         }
-        System.out.println(bonuspenaltyList.size());
+        System.out.println(bonusPenaltyList.size());
 
     }
 
     @Test
     public void test3() {
-        CheckingDao cd = new ClassPathXmlApplicationContext("beans.xml").getBean(CheckingDao.class);
+        BonusPenaltyService bps = new ClassPathXmlApplicationContext("beans.xml").getBean(BonusPenaltyService.class);
+        List<BonusPenalty> id = bps.findByIf("time", "2017-02-02", 0);
+        System.out.println(id.size());
 
 
     }

@@ -1,7 +1,5 @@
 package com.cai.utils;
 
-import java.text.DecimalFormat;
-
 /**
  * Created by caibaolong on 2017/1/17.
  * 操作字符串的相关工具

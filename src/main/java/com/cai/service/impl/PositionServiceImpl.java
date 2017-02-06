@@ -15,6 +15,8 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/15.
+ * <p>
+ * 职位的业务处理接口实现
  */
 @Service
 public class PositionServiceImpl implements PositionService {
@@ -24,7 +26,12 @@ public class PositionServiceImpl implements PositionService {
     @Resource
     private DepartmentDao departmentDao;
 
-    //添加职位 所选部门下职位名唯一
+    /**
+     * 添加职位 所选部门下职位名唯一
+     *
+     * @param position 要添加的职位
+     * @return 添加情况
+     */
     @Override
     public boolean add(Position position) {
         int did = position.getDepartment().getId();
@@ -49,7 +56,12 @@ public class PositionServiceImpl implements PositionService {
         return positionDao.remove(position) > 0;
     }
 
-    //修改职位 所修改的职位与所属部门下的职位不能重复
+    /**
+     * 修改职位 所选部门下职位名唯一
+     *
+     * @param position 要修改的职位
+     * @return 修改情况
+     */
     @Override
     public boolean update(Position position) {
         int did = position.getDepartment().getId();
@@ -57,7 +69,7 @@ public class PositionServiceImpl implements PositionService {
         List<Position> positions = findByIf("pName", pName, 0);
         if (positions.size() > 0) {
             for (Position po : positions) {
-                if (po.getDepartment().getId()==did) {
+                if (po.getDepartment().getId() == did) {
                     return false;
                 }
             }
@@ -73,12 +85,7 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public List<Position> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<Position> list = positionDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return positionDao.find(map);
     }
 }

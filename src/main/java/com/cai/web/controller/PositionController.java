@@ -6,7 +6,6 @@ import com.cai.domain.Position;
 import com.cai.service.DepartmentService;
 import com.cai.service.EmployeeService;
 import com.cai.service.PositionService;
-import com.cai.utils.TimeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +18,7 @@ import java.util.List;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 职位操作页面控制
  */
 @Controller
@@ -26,10 +26,8 @@ import java.util.List;
 public class PositionController {
     @Resource
     private PositionService positionService;
-
     @Resource
     private DepartmentService departmentService;
-
     @Resource
     private EmployeeService employeeService;
 

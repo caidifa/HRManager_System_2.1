@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 简历的业务基本接口
  */
 public interface PostInfoService extends BaseService<PostInfo> {
@@ -31,7 +32,7 @@ public interface PostInfoService extends BaseService<PostInfo> {
     /**
      * 用户选择招聘信息投递简历→生成投递信息
      *
-     * @param resume 用户简历
+     * @param resume   用户简历
      * @param hireInfo 用户选择的招聘信息
      * @return 回馈投递情况
      */
@@ -39,7 +40,6 @@ public interface PostInfoService extends BaseService<PostInfo> {
 
     /**
      * 得到详细的投递信息
-     * OK
      *
      * @param postInfo 投递信息
      * @return 详细的投递信息

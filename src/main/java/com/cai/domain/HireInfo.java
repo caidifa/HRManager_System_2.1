@@ -4,24 +4,26 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
+ * <p>
+ * 招聘信息
+ * <p>
  * 创建时的 SQL语句
  * CREATE TABLE `hireinfo` (
-     `id` int(11) NOT NULL AUTO_INCREMENT,
-     `departID` int(11) DEFAULT NULL,
-     `positionID` int(11) DEFAULT NULL,
-     `needNumber` int(11) DEFAULT NULL,
-     `status` varchar(20) DEFAULT NULL,
-     PRIMARY KEY (`id`)
-   ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
- * 招聘信息
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `departID` int(11) DEFAULT NULL,
+ * `positionID` int(11) DEFAULT NULL,
+ * `needNumber` int(11) DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
  */
 public class HireInfo implements Serializable {
     private int id;
-    private int needNumber;//招聘人数
-    private String status;//状态
+    private int needNumber;         //招聘人数
+    private String status;          //状态
 
-    private Department department;//部门
-    private Position position;//职位
+    private Department department;  //部门
+    private Position position;      //职位
 
     public HireInfo() {
     }
@@ -78,12 +80,12 @@ public class HireInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "HireInfo{" +
+        return "<--HireInfo{" +
                 "id=" + id +
                 ", needNumber=" + needNumber +
                 ", status='" + status + '\'' +
-                ", \ndepartment=" + department +
-                ", \nposition=" + position +
+                ", \n-->department=" + department +
+                ", \n-->position=" + position +
                 '}';
     }
 }

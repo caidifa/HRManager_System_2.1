@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/15.
+ * <p>
  * 培训信息的业务处理接口实现
  */
 @Service
@@ -50,13 +51,8 @@ public class TrainingInfoServiceImpl implements TrainingInfoService {
     @Override
     public List<TrainingInfo> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<TrainingInfo> list = trainingInfoDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return trainingInfoDao.find(map);
     }
 
     /**
@@ -80,7 +76,7 @@ public class TrainingInfoServiceImpl implements TrainingInfoService {
             String s2 = info.getEndDate();
             if (TimeUtil.midCompare(s1, s3, s2) || TimeUtil.midCompare(s1, s4, s2)) {
                 map.clear();
-                map.put("fail", "与其他培训时间有冲突!");
+                map.put("fail", "与其他的培训时间有冲突!");
                 return map;
             }
         }
@@ -90,7 +86,7 @@ public class TrainingInfoServiceImpl implements TrainingInfoService {
             for (FaceNotice notice : notices) {
                 if (TimeUtil.midCompare(s3, notice.getFaceTime(), s4)) {
                     map.clear();
-                    map.put("fail", "与面试时间有冲突!");
+                    map.put("fail", "与面试的时间有冲突!");
                     return map;
                 }
             }

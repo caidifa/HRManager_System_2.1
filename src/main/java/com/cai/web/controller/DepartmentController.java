@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 部门操作控制
  */
 @Controller
@@ -25,10 +26,8 @@ import java.util.List;
 public class DepartmentController {
     @Resource
     private DepartmentService departmentService;
-
     @Resource
     private PositionService positionService;
-
     @Resource
     private EmployeeService employeeService;
 
@@ -178,7 +177,5 @@ public class DepartmentController {
         out.flush();
         out.close();
     }
-
-
 
 }

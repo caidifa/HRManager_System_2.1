@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
+ *
+ * 面试通知
+ *
  * 创建时的 SQL语句
  * CREATE TABLE `facenotice` (
      `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -14,16 +17,16 @@ import java.io.Serializable;
      `status` varchar(20) DEFAULT NULL,
      PRIMARY KEY (`id`)
    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
- * 面试通知
+ *
  */
 public class FaceNotice implements Serializable {
     private int id;
-    private String faceTime;//面试时间
-    private String location;//面试地点
-    private String status;//状态
+    private String faceTime;    //面试时间
+    private String location;    //面试地点
+    private String status;      //状态
 
-    private Employee employee;//面试员
-    private PostInfo postInfo;//相关的投递信息
+    private Employee employee;  //面试员
+    private PostInfo postInfo;  //投递信息
 
     public FaceNotice() {
     }
@@ -88,13 +91,13 @@ public class FaceNotice implements Serializable {
 
     @Override
     public String toString() {
-        return "FaceNotice{" +
+        return "<--FaceNotice{" +
                 "id=" + id +
                 ", faceTime='" + faceTime + '\'' +
                 ", location='" + location + '\'' +
                 ", status='" + status + '\'' +
-                ", \nemployee=" + employee +
-                ", \npostInfo=" + postInfo +
+                ", \n-->employee=" + employee +
+                ", \n-->postInfo=" + postInfo +
                 '}';
     }
 }

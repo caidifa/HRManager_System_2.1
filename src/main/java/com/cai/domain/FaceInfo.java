@@ -4,24 +4,27 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/16.
+ * <p>
+ * 面试情况
+ * <p>
  * 创建时的 SQL语句
  * CREATE TABLE `faceinfo` (
-     `id` int(11) NOT NULL AUTO_INCREMENT,
-     `faceNoticeID` int(11) DEFAULT NULL,
-     `penScores` int(11) DEFAULT NULL,
-     `faceScores` int(11) DEFAULT NULL,
-     `status` varchar(20) DEFAULT NULL,
-     PRIMARY KEY (`id`)
-   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `faceNoticeID` int(11) DEFAULT NULL,
+ * `penScores` int(11) DEFAULT NULL,
+ * `faceScores` int(11) DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
  * 面试情况
  */
 public class FaceInfo implements Serializable {
     private int id;
-    private int penScores;//笔试分数
-    private int faceScores;//面试官评分
-    private String status;//状态
+    private int penScores;          //笔试分数
+    private int faceScores;         //面试官评分
+    private String status;          //状态
 
-    private FaceNotice faceNotice;
+    private FaceNotice faceNotice;  //面试通知
 
     public FaceInfo() {
     }
@@ -78,7 +81,7 @@ public class FaceInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "FaceInfo{" +
+        return "<--FaceInfo{" +
                 "id=" + id +
                 ", penScores=" + penScores +
                 ", faceScores=" + faceScores +

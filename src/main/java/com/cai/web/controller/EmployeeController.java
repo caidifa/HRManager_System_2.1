@@ -18,12 +18,12 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 员工(含管理员)操作页面控制
  */
 @Controller
 @RequestMapping("/emp")
 public class EmployeeController {
-
     //<editor-fold desc="所需的业务接口">
     @Resource
     private EmployeeService employeeService;
@@ -33,8 +33,6 @@ public class EmployeeController {
     private DepartmentService departmentService;
     @Resource
     private PostInfoService postInfoService;
-    @Resource
-    private UserService userService;
     @Resource
     private ResumeService resumeService;
     @Resource
@@ -310,7 +308,7 @@ public class EmployeeController {
         PrintWriter out = response.getWriter();
         Employee e = employeeService.findByIf("id", null, eid).get(0);
         String password = e.getPassword();
-        if ("".equals(password1)||"".equals(password2)||"".equals(password2)) {
+        if ("".equals(password1) || "".equals(password2) || "".equals(password2)) {
             out.print("请全部输入!");
             out.close();
             return;

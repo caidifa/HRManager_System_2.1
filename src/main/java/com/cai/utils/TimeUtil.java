@@ -137,23 +137,25 @@ public class TimeUtil {
      * 通过当前年月得到上一个月的年月
      * 例子:2017-01返回2016-12 , 2017-02返回2017-01
      *
-     * @param nowYM 当前年月
+     * @param nowYM 当前年月或含年月的所有日期如:2017-01-XX XX:XX:XX...
      * @return 上一个月的年月
      */
     public static String getCountDate(String nowYM) {
         //获得年和月变转成int类型便于计算
         int year = Integer.parseInt(nowYM.substring(0, 4));
-        int month = Integer.parseInt(nowYM.substring(5));
-        StringBuffer sb = new StringBuffer();
+        int month = Integer.parseInt(nowYM.substring(5, 7));
+        StringBuilder sb = new StringBuilder();
         if (month == 1) {
             sb.append(year - 1);
             sb.append("-12");
         } else {
             sb.append(year);
             if (month < 11) {
-                sb.append("-0" + (month - 1));
+                sb.append("-0");
+                sb.append(month - 1);
             } else {
-                sb.append("-" + (month - 1));
+                sb.append("-");
+                sb.append(month - 1);
             }
         }
         return sb.toString();

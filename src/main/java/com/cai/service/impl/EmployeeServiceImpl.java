@@ -16,15 +16,13 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
- * 用户业务接口实现
+ * <p>
+ * 用户业务处理接口实现
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Resource
     private EmployeeDao employeeDao;
-
-    @Resource
-    private PositionDao positionDao;
 
     @Override
     public boolean add(Employee employee) {
@@ -36,7 +34,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDao.remove(employee) > 0;
     }
 
-    //修改员工信息
     @Override
     public boolean update(Employee employee) {
         return employeeDao.update(employee) > 0;
@@ -50,13 +47,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<Employee> list = employeeDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return employeeDao.find(map);
     }
 
     /**
@@ -96,6 +88,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return map;
     }
 
+    /**
+     * 获得日工资
+     *
+     * @param eid 员工id
+     * @return 该员工的日工资
+     */
     @Override
     public double getDaySalary(int eid) {
         Map map = new HashedMap();
@@ -105,6 +103,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return MoneyUtil.saveTwoNumber(d);
     }
 
+    /**
+     * 获得小时工资
+     *
+     * @param eid 员工id
+     * @return 该员工的时工资
+     */
     @Override
     public double getHourSalary(int eid) {
         double d = getDaySalary(eid) / 8D;

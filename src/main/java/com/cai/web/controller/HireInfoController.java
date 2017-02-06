@@ -19,6 +19,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 招聘信息操作控制
  */
 @Controller
@@ -26,7 +27,6 @@ import java.util.Map;
 public class HireInfoController {
     @Resource
     private DepartmentService departmentService;
-
     @Resource
     private HireInfoService hireInfoService;
 

@@ -1,12 +1,9 @@
 package com.cai.service.impl;
 
-import com.cai.dao.DepartmentDao;
 import com.cai.dao.TrainingDao;
 import com.cai.dao.TrainingInfoDao;
-import com.cai.domain.Department;
 import com.cai.domain.Training;
 import com.cai.domain.TrainingInfo;
-import com.cai.service.DepartmentService;
 import com.cai.service.TrainingService;
 import com.cai.utils.TimeUtil;
 import org.apache.commons.collections.map.HashedMap;
@@ -20,6 +17,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/15.
+ * <p>
  * 培训员工关联的业务处理接口实现
  */
 @Service
@@ -53,13 +51,8 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public List<Training> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<Training> list = trainingDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return trainingDao.find(map);
     }
 
     /**

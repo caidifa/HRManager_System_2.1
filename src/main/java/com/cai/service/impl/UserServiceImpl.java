@@ -12,6 +12,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
+ * <p>
  * 用户业务接口实现
  */
 @Service
@@ -37,13 +38,8 @@ public class UserServiceImpl implements UserService {
 
     public List<User> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
-        List<User> list = userDao.find(map);
-        return list;
+        map.put(ifName, id != 0 ? id : content);
+        return userDao.find(map);
     }
 
     /**

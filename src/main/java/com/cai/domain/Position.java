@@ -4,28 +4,28 @@ import java.io.Serializable;
 
 /**
  * Created by caibaolong on 2017/1/14.
- *
+ * <p>
+ * 职位
+ * <p>
  * 创建时的 SQL语句
  * CREATE TABLE `position` (
-     `id` int(11) NOT NULL AUTO_INCREMENT,
-     `departID` int(11) DEFAULT NULL,
-     `pName` varchar(20) DEFAULT NULL,
-     `basicSalary` double(10,2) DEFAULT NULL,
-     `createTime` date DEFAULT NULL,
-     `status` varchar(20) DEFAULT NULL,
-     PRIMARY KEY (`id`)
-   ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
- *
- * 职位
+ * `id` int(11) NOT NULL AUTO_INCREMENT,
+ * `departID` int(11) DEFAULT NULL,
+ * `pName` varchar(20) DEFAULT NULL,
+ * `basicSalary` double(10,2) DEFAULT NULL,
+ * `createTime` date DEFAULT NULL,
+ * `status` varchar(20) DEFAULT NULL,
+ * PRIMARY KEY (`id`)
+ * ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
  */
 public class Position implements Serializable {
     private int id;
-    private String pName;//职位名
-    private double basicSalary;//起薪
-    private String createTime;//创建时间
-    private String status;//状态
+    private String pName;           //职位名
+    private double basicSalary;     //起薪
+    private String createTime;      //创建时间
+    private String status;          //状态
 
-    private Department department;//部门
+    private Department department;  //部门
 
     public Position() {
     }
@@ -90,13 +90,13 @@ public class Position implements Serializable {
 
     @Override
     public String toString() {
-        return "Position{" +
+        return "<--Position{" +
                 "id=" + id +
                 ", pName='" + pName + '\'' +
                 ", basicSalary=" + basicSalary +
                 ", createTime='" + createTime + '\'' +
                 ", status='" + status + '\'' +
-                ", \ndepartment=" + department +
+                ", \n-->department=" + department +
                 '}';
     }
 }

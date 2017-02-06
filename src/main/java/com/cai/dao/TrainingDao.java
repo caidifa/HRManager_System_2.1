@@ -8,7 +8,8 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/12.
- * 培训-员工关联数据库操作接口
+ * <p>
+ * 培训<-->员工关联数据库操作接口
  */
 @Repository
 public interface TrainingDao extends BaseDao<Training> {

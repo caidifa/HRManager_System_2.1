@@ -11,7 +11,7 @@
 <div class="am-cf am-padding am-padding-bottom-0">
     <div class="am-fl am-cf">
         <strong class="am-text-secondary am-text-lg">添加奖惩</strong> /
-        <small>Add Bonuspenalty</small>
+        <small>Add BonusPenalty</small>
     </div>
 </div>
 <hr/>

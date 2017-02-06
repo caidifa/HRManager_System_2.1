@@ -1,17 +1,14 @@
 package com.cai.service.impl;
 
-import com.cai.dao.CheckingDao;
 import com.cai.dao.SalaryDao;
-import com.cai.domain.Bonuspenalty;
-import com.cai.domain.Checking;
+import com.cai.domain.BonusPenalty;
 import com.cai.domain.Employee;
 import com.cai.domain.Salary;
-import com.cai.service.BonuspenaltyService;
+import com.cai.service.BonusPenaltyService;
 import com.cai.service.CheckingService;
 import com.cai.service.EmployeeService;
 import com.cai.service.SalaryService;
 import com.cai.utils.MoneyUtil;
-import com.cai.utils.TimeUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +18,20 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/20.
- * 有关薪资的业务处理
+ * <p>
+ * 有关薪资的业务处理接口实现
  */
 @Service
 public class SalaryServiceImpl implements SalaryService {
     @Resource
     private SalaryDao salaryDao;
+
     @Resource
     private EmployeeService employeeService;
+
     @Resource
-    private BonuspenaltyService bonuspenaltyService;
-    @Resource
-    private CheckingDao checkingDao;
+    private BonusPenaltyService bonusPenaltyService;
+
     @Resource
     private CheckingService checkingService;
 
@@ -59,11 +58,7 @@ public class SalaryServiceImpl implements SalaryService {
     @Override
     public List<Salary> findByIf(String ifName, String content, int id) {
         Map<String, Object> map = new HashedMap();
-        if (id != 0) {
-            map.put(ifName, id);
-        } else {
-            map.put(ifName, content);
-        }
+        map.put(ifName, id != 0 ? id : content);
         return salaryDao.find(map);
     }
 
@@ -86,7 +81,7 @@ public class SalaryServiceImpl implements SalaryService {
         //扣除保险
         double salary = e.getSalary() * 0.8D;
         //得到该员工一个月内的上班天数 并算出未上班天数应扣除的薪资
-        salary -= (checkingService.getDaysByEid(eid,yMonth)) * employeeService.getDaySalary(eid);
+        salary -= (checkingService.getDaysByEid(eid, yMonth)) * employeeService.getDaySalary(eid);
         // 计算奖金和罚金
         double more = 0;
         double less = 0;
@@ -95,14 +90,14 @@ public class SalaryServiceImpl implements SalaryService {
         map.put("eid", eid);
         map.put("time", yMonth + "%");
         map.put("type", "奖励");
-        List<Bonuspenalty> bonuses = bonuspenaltyService.findByMap(map);
-        for (Bonuspenalty b : bonuses) {
+        List<BonusPenalty> bonuses = bonusPenaltyService.findByMap(map);
+        for (BonusPenalty b : bonuses) {
             more += b.getMoney();
         }
         salary += more;
         map.put("type", "惩罚");
-        bonuses = bonuspenaltyService.findByMap(map);
-        for (Bonuspenalty b : bonuses) {
+        bonuses = bonusPenaltyService.findByMap(map);
+        for (BonusPenalty b : bonuses) {
             less += b.getMoney();
         }
         salary -= less;
@@ -118,7 +113,7 @@ public class SalaryServiceImpl implements SalaryService {
         s.setsCost(MoneyUtil.saveTwoNumber(e.getSalary() * 0.2D));
         s.setTotal(MoneyUtil.saveTwoNumber(salary));
         add(s);
-        map.put("ok", e.getResume().getRealName()+"的"+yMonth+"的薪资结算成功!");
+        map.put("ok", e.getResume().getRealName() + "的" + yMonth + "的薪资结算成功!");
         return map;
     }
 }

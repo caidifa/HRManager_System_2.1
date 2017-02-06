@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/13.
+ * <p>
  * 招聘信息数据库操作接口
  */
 @Repository

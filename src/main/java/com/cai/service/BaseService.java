@@ -51,20 +51,4 @@ public interface BaseService<T> {
      */
     List<T> findByIf(String ifName, String content, int id);
 
-    // /**
-    //  * 查找所有对象  不带内部对象
-    //  *
-    //  * @return 所有对象集合
-    //  */
-    // List<T> findAllOnly();
-    //
-    // /**
-    //  * 带条件查询对象  不带内部对象
-    //  *
-    //  * @param ifName  条件名
-    //  * @param content 条件内容
-    //  * @param id      条件名为 *id,则用id查找
-    //  * @return 查找结果 null:没有满足条件的对象
-    //  */
-    // List<T> findByIfOnly(String ifName, String content, int id);
 }

@@ -23,6 +23,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/17.
+ * <p>
  * 培训相关的页面控制
  */
 @Controller
@@ -81,7 +82,7 @@ public class TrainingController {
         String endDate = trainingInfo.getEndDate();
         String now = TimeUtil.nowForYMD();
         if ("".equals(startDate) || "".equals(endDate)) {
-            out.print("开始日期和结束日期不为能空!");
+            out.print("开始和结束日期不为能空!");
             out.close();
             return;
         } else {
@@ -147,7 +148,7 @@ public class TrainingController {
             addedEmp1.add(training.getEmployee());
         }
         for (Employee employee : addedEmp1) {
-            addedEmp.add(employeeService.findByIf("id", null, employee.getId()).get(0)) ;
+            addedEmp.add(employeeService.findByIf("id", null, employee.getId()).get(0));
         }
         model.addAttribute("addedEmp", addedEmp);
         return "train/emp_show_admin";
@@ -155,7 +156,7 @@ public class TrainingController {
 
     // 管理员 修改培训页面
     @RequestMapping(value = "/toEditTrain")
-    public String toEditTrain(int tiid,Model model) {
+    public String toEditTrain(int tiid, Model model) {
         TrainingInfo trainingInfo = trainingInfoService.findByIf("id", null, tiid).get(0);
         int eid = trainingInfo.getTeacher().getId();
         Employee e = employeeService.findByIf("id", null, eid).get(0);
@@ -184,7 +185,7 @@ public class TrainingController {
         String endDate = trainingInfo.getEndDate();
         String now = TimeUtil.nowForYMD();
         if ("".equals(startDate) || "".equals(endDate)) {
-            out.print("开始日期和结束日期不为能空!");
+            out.print("开始和结束的日期不为能空!");
             out.close();
             return;
         } else {

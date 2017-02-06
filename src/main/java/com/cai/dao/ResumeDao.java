@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Created by caibaolong on 2017/1/13.
+ * <p>
  * 简历数据库操作接口
  */
 @Repository
@@ -26,6 +27,7 @@ public interface ResumeDao extends BaseDao<Resume> {
 
     /**
      * 通过用户id查找
+     *
      * @param resume 带有user属性的简历
      * @return 满足条件的简历
      */
