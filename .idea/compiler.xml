@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="HRM_System" />
         <module name="HRManager_System_1.0" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="HRM_System" target="1.8" />
       <module name="HRManager_System_1.0" target="1.8" />
     </bytecodeTargetLevel>
   </component>

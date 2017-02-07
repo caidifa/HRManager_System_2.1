@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="HRManager_System_1.0:war exploded">
+  <artifact type="exploded-war" name="HRM_System:war exploded">
     <output-path>$PROJECT_DIR$/target/HRManager_System</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="HRManager_System_1.0" />
+          <element id="module-output" name="HRM_System" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.2.6.RELEASE" />
@@ -52,7 +52,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/HRManager_System/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="HRManager_System_1.0/web/Web" />
+      <element id="javaee-facet-resources" facet="HRM_System/web/Web" />
     </root>
   </artifact>
 </component>
