@@ -3,7 +3,7 @@
 -->   版本:Version 2.0
 ----------------------------------------------------------------------------->
 --> IDE工具:IntelliJ IDEA 2016
---> 环境搭配:Maven,JDK1.8,win10
+--> 环境搭配:Maven, JDK1.8, win10
 
 --> 版本控制:Git
 --> 项目开源地址:
@@ -24,7 +24,7 @@
 
     0.根据项目要求,设计一套完整的数据库表结构(表关联(HRMS).png) → [**重要**]:
         ⑴.使用Excel设计制作,截图保存为表关联(HRMS).png;
-        ⑵.在MySQL里建立新建数据库(humanresource);
+        ⑵.在MySQL里建立新建数据库(hr_db);
         ⑶.根据设计,创建好所有的表(创建时的SQL语句会写在对应的每个实体类的注释中(/java/com/cai/domain/));
 
     1.使用IDEA创建一个新的Maven项目(Web版),并配置项目所需的文件夹结构;
@@ -39,7 +39,7 @@
             ③.获得 dataSource 数据源 (用C3P0数据库连接池);
             ④.声明 sqlSessionFactory (使用 mybatis的架包里的 SqlSessionFactoryBean配置);
             ⑤.配置扫描 Dao接口包，动态实现 Dao接口，注入到 Spring容器中;
-            ⑥.配置transactionManager事务管理 并通过aop(切面编程)切入进去;
+            ⑥.配置 transactionManager事务管理 并通过aop(切面编程)切入进去;
 
         ⑵.配置 springmvc-servlet.xml(前端核心 servlet)
             ①.管理 web下的 controller控制层(扫描注解);

@@ -42,7 +42,7 @@
                                 </div>
                                 <c:if test="${pil.remark eq '未读'}">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <a href="javascript:noticeUserFace(${pil.id})"
+                                        <a href="javascript:toCreateFaceNotice(${pil.id})"
                                            class="am-btn am-btn-success am-btn-xs">
                                             <span class="am-icon-send-o"></span> 通知面试
                                         </a>

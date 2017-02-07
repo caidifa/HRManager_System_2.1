@@ -129,7 +129,7 @@ public class CheckingServiceImpl implements CheckingService {
                 b.setMoney(employeeService.getDaySalary(eid));
             } else {
                 //迟到惩罚
-                b.setReason("迟到了");
+                b.setReason("迟到了" + i + "小时");
                 //设置惩罚金额为日工资
                 b.setMoney(employeeService.getHourSalary(eid) * 2 * i);
             }
@@ -210,7 +210,7 @@ public class CheckingServiceImpl implements CheckingService {
                 b.setType("惩罚");
                 ck.setResult(StringUtil.toOne(ck.getResult(), "早退了"));
                 int i = (int) map.get("early");
-                b.setReason("早退了");
+                b.setReason("早退了" + i + "小时");
                 b.setMoney(employeeService.getHourSalary(eid) * 2 * i);
                 map.clear();
                 map.put("ok", "打卡成功!早退了" + i + "小时!");
@@ -221,7 +221,7 @@ public class CheckingServiceImpl implements CheckingService {
                 b.setType("奖励");
                 ck.setResult(StringUtil.toOne(ck.getResult(), "加班了"));
                 int i = (int) map.get("more");
-                b.setReason("加班了");
+                b.setReason("加班了" + i + "小时!");
                 b.setMoney(employeeService.getHourSalary(eid) * 3 * i);
                 map.clear();
                 map.put("ok", "打卡成功!加班了" + i + "小时!");

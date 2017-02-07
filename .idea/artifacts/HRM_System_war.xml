@@ -1,8 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="HRManager_System_1.0:war">
+  <artifact type="war" name="HRM_System:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="HRManager_System.war">
-      <element id="artifact" artifact-name="HRManager_System_1.0:war exploded" />
+      <element id="artifact" artifact-name="HRM_System:war exploded" />
     </root>
   </artifact>
 </component>

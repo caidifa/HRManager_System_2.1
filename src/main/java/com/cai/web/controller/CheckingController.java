@@ -111,7 +111,7 @@ public class CheckingController {
     @RequestMapping(value = "/showAllBonus.do")
     public String showAllBonus(Model model) {
         List<BonusPenalty> bonusPenaltyList = bonusPenaltyService.findAll();
-        model.addAttribute("bonuspenaltyList", bonusPenaltyList);
+        model.addAttribute("bonusPenaltyList", bonusPenaltyList);
         return "bonus/info_all_admin";
     }
 
@@ -153,7 +153,7 @@ public class CheckingController {
     @RequestMapping(value = "/showMyBonus.do")
     public String showMyBonus(int eid, Model model) {
         List<BonusPenalty> bonusPenaltyList = bonusPenaltyService.findByIf("eid", null, eid);
-        model.addAttribute("bonuspenaltyList", bonusPenaltyList);
+        model.addAttribute("bonusPenaltyList", bonusPenaltyList);
         return "bonus/info_show_emp";
     }
 

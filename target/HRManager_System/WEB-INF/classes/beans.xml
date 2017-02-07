@@ -71,7 +71,4 @@
         <aop:advisor advice-ref="tx" pointcut-ref="p"/>
     </aop:config>
 
-
-
-
 </beans>

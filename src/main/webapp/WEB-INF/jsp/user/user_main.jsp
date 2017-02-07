@@ -15,6 +15,16 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/amazeui.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <style type="text/css">
+        #container2, #sliders {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 5% auto;
+        }
+        #container2 {
+            height: 400px;
+        }
+    </style>
     <script type="text/javascript">
         // 查看个人信息
         function showUserInfo() {
@@ -97,6 +107,58 @@
                 }
             });
         }
+        //图表生成
+        $(function () {
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container2',
+                    type: 'column',
+                    options3d: {
+                        enabled: true,
+                        alpha: 15,
+                        beta: 15,
+                        depth: 50,
+                        viewDistance: 25
+                    }
+                },
+                title: {
+                    text: '招聘信息图表'
+                },
+                plotOptions: {
+                    column: {
+                        depth: 25
+                    }
+                },
+                xAxis: {
+                    categories: ['人事部-助理','财务部-经理','管理部-助理','管理部主管','技术部-工程师','人事部经理','测试部1-经理']
+                },
+                series: [{
+                    data:[
+                        ['(人数:2)', 2],
+                        ['(人数:1)', 1],
+                        ['(人数:4)', 4],
+                        ['(人数:7)', 7],
+                        ['(人数:10)', 10],
+                        ['(人数:6)', 6],
+                        ['(人数:3)', 3]
+                    ]
+                }]
+            });
+
+            function showValues() {
+                $('#alpha-value').html(chart.options.chart.options3d.alpha);
+                $('#beta-value').html(chart.options.chart.options3d.beta);
+                $('#depth-value').html(chart.options.chart.options3d.depth);
+            }
+
+            $('#sliders input').on('input change', function () {
+                chart.options.chart.options3d[this.id] = this.value;
+                showValues();
+                chart.redraw(false);
+            });
+
+            showValues();
+        });
 
     </script>
 </head>
@@ -198,11 +260,31 @@
     <%--主要显示区--%>
     <div class="admin-content">
 
-        <div class="admin-content-body" id="mainShow">
-            <p>欢迎登陆浮云梦影招聘系统</p><br>
-            <p>1.如果你是新注册的用户,请及时在填写简历前把信息补全</p><br>
-            <p>2.邮箱注册的用户,请补填手机号</p><br>
-            <p>3.手机注册的用户,请补填邮箱</p><br>
+        <div class="admin-content-body" id="mainShow" style="padding: 1em">
+            <p>欢迎登陆浮云梦影招聘系统! 提示:如果你是新注册的用户,请及时在填写简历前把信息补全</p>
+            <div id="container2"></div>
+            <div id="sliders">
+                <table>
+                    <tr>
+                        <td>Alpha Angle</td>
+                        <td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value"
+                                                                                               class="value"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Beta Angle</td>
+                        <td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value"
+                                                                                                class="value"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Depth</td>
+                        <td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value"
+                                                                                                 class="value"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
     </div>
@@ -249,6 +331,8 @@
         </div>
     </div>
 </div>
-
+<script src="code/highcharts.js"></script>
+<script src="code/highcharts-3d.js"></script>
+<script src="code/modules/exporting.js"></script>
 </body>
 </html>

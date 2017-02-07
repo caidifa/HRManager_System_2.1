@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cai.dao.BonuspenaltyDao">
+<mapper namespace="com.cai.dao.BonusPenaltyDao">
 
     <!--奖惩1对1员工的查询结果映射-->
-    <resultMap id="bonuspenaltyEmp" type="com.cai.domain.Bonuspenalty">
+    <resultMap id="bonuspenaltyEmp" type="com.cai.domain.BonusPenalty">
         <id property="id" column="id"/>
         <result property="reason" column="reason"/>
         <result property="time" column="time"/>
@@ -25,7 +25,7 @@
 
     <!--添加奖惩-->
     <insert id="add">
-        INSERT INTO bonuspenalty
+        INSERT INTO bonusPenalty
         (
         empID,
         reason,
@@ -47,13 +47,13 @@
 
     <!--删除奖惩-->
     <delete id="remove">
-        DELETE FROM bonuspenalty
+        DELETE FROM bonusPenalty
         WHERE id= #{id}
     </delete>
 
     <!--更新奖惩-->
     <update id="update">
-        UPDATE bonuspenalty
+        UPDATE bonusPenalty
         <set>
             <if test="employee != null and employee.id != 0"> empID = #{employee.id},</if>
             <if test="reason != null"> reason = #{reason},</if>
@@ -76,7 +76,7 @@
         e.balance,
         e.level,
         e.status estatus
-        FROM bonuspenalty b,employee e
+        FROM bonusPenalty b,employee e
         <where>
             e.id = b.empID
             <if test="id != null and id !=0">AND b.id = #{id}</if>

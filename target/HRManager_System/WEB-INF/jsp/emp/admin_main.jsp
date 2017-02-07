@@ -144,6 +144,50 @@
                 }
             });
         }
+        //加载图表
+        $(function () {
+            Highcharts.chart('container1', {
+                chart: {
+                    type: 'pie',
+                    options3d: {
+                        enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: '员工所占比例, 2017年'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 35,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '所占比例',
+                    data: [
+                        ['管理员(人数:4)', 4],
+                        ['离职员工(人数:1)', 1],
+                        {
+                            name: '普通员工(人数:4)',
+                            y: 4,
+                            sliced: true,
+                            selected: true
+                        },
+                    ]
+                }]
+            });
+        });
     </script>
 </head>
 <body>
@@ -172,17 +216,6 @@
                     <span class="am-badge am-badge-danger">${sessionScope.faceInfoListCount}</span>
                 </a>
             </li>
-            <%--<li class="am-dropdown" data-am-dropdown>--%>
-                <%--<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:void(0);">--%>
-                    <%--<span class="am-icon-user"></span> 管理员个人信息--%>
-                    <%--<span class="am-icon-caret-down"></span>--%>
-                <%--</a>--%>
-                <%--<ul class="am-dropdown-content">--%>
-                    <%--<li><a href="javascript:showAdminInfo()"><span class="am-icon-eye"></span> 查 看</a></li>--%>
-                    <%--<li><a href="javascript:editAdminInfo()"><span class="am-icon-pencil"></span> 编 辑</a></li>--%>
-                    <%--<li><a href="javascript:logout()"><span class="am-icon-sign-out"></span> 注 销</a></li>--%>
-                <%--</ul>--%>
-            <%--</li>--%>
             <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span
                     class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
         </ul>
@@ -276,7 +309,6 @@
                         真实姓名:${sessionScope.employee.resume.realName}<br>
                         所属部门:${sessionScope.employee.department.dName}<br>
                         在职职位:${sessionScope.employee.position.pName}<br>
-                        工资卡余额:${sessionScope.employee.balance}<br>
                     </p>
                 </div>
             </div>
@@ -288,8 +320,10 @@
     <%--主要显示区--%>
     <div class="admin-content">
 
-        <div class="admin-content-body" id="mainShow">
-            欢迎登陆浮云梦影管理员系统
+        <div class="admin-content-body" id="mainShow" style="padding: 1em">
+            <p>欢迎登陆浮云梦影管理员系统!</p>
+            <div id="container1" style="height: 400px;margin-top: 10%"></div>
+
         </div>
 
         <footer class="admin-content-footer">
@@ -341,6 +375,8 @@
     </div>
 
 </div>
-
+<script src="code/highcharts.js"></script>
+<script src="code/highcharts-3d.js"></script>
+<script src="code/modules/exporting.js"></script>
 </body>
 </html>
